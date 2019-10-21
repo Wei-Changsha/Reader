@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<litepal>
+    <dbname value="BookBean"></dbname>
+    <version value="2"></version>
+
+    <list>
+        <mapping class="com.example.reader.bean.Bookbean"></mapping>
+    </list>
+</litepal>

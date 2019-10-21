@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/book_review"
+            android:icon="@drawable/icon"
+            android:title="书评区"
+            />
+
+        <item
+            android:id="@+id/book_discussion"
+            android:icon="@drawable/icon"
+            android:title="讨论区"
+            />
+        <item
+            android:id="@+id/book_shortage"
+            android:icon="@drawable/icon"
+            android:title="书荒取"
+            />
+
+    </group>
+</menu>

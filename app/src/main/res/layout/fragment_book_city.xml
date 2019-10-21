@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <!--<Button-->
+        <!--android:id="@+id/bt_create"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60sp"-->
+        <!--android:text="创建数据库"/>-->
+    <!--<Button-->
+        <!--android:id="@+id/bt_book_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60sp"-->
+        <!--android:text="书单"-->
+        <!--/>-->
+    <!--<Button-->
+        <!--android:id="@+id/bt_rank_list"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60sp"-->
+        <!--android:text="排行榜"/>-->
+
+
+    <!--<com.knowledge.mnlin.linemenuview.LineMenuView-->
+        <!--android:id="@+id/line_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:menu="@menu/bookcitymenu">-->
+
+    <!--</com.knowledge.mnlin.linemenuview.LineMenuView>-->
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:menu="@menu/bookcitymenu"
+        >
+    </com.google.android.material.navigation.NavigationView>
+</androidx.drawerlayout.widget.DrawerLayout>
