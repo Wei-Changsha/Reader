@@ -12,7 +12,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bookcity.bookClassify.ClassifyListActivity"></activity>
+        <activity android:name=".bookcity.bookRanking.RankingActivity"></activity>
+        <activity android:name=".bookcity.bookClassify.BookDetailActivity" />
+        <activity android:name=".bookcity.bookListAvtivity.ListActivity" />
+        <activity android:name=".bookcity.bookClassify.ClassifyListActivity" />
         <activity android:name=".bookcity.bookClassify.ClassifyAvtivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

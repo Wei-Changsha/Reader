@@ -111,7 +111,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/shape"/>
             <TextView
-                android:id="@+id/nv_zhun"
+                android:id="@+id/nv_zun"
                 android:clickable="true"
                 android:text="女尊"
                 android:textSize="18sp"
@@ -158,9 +158,9 @@
                 android:layout_weight="1"
                 android:background="@drawable/shape"/>
             <TextView
-                android:id="@+id/nv_bai_he"
+                android:id="@+id/nv_gao_xiao"
                 android:clickable="true"
-                android:text="百合"
+                android:text="搞笑"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:layout_width="match_parent"

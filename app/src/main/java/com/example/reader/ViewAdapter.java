@@ -39,40 +39,12 @@ public class ViewAdapter extends FragmentPagerAdapter implements Serializable {
         bookShelfFragmentList.add(bookCityFragment);
         bookShelfFragmentList.add(bookCenterFragment);
     }
-
-//    @Override
-//    public View getView(int pos,View convertView,ViewGroup parent){
-//
-//        return convertView;
-//
-//    }
-
+    
     @NonNull
     @Override
     public Fragment getItem(int position) {
         initFragment();
         return bookShelfFragmentList.get(position);
-//        switch (position){
-//            case 0:{
-//                Intent intent=new Intent();
-//                bookShelfFragmentList.add(BookShelfFragment.newInstance(tabs[position]));
-//                 return BookShelfFragment.newInstance(tabs[position]);//返回书架碎片
-//            }
-//            case 1:{
-//                bookShelfFragmentList.add(BookCityFragment.newInstance());
-//                return BookCityFragment.newInstance();
-//            }
-//            case 3:{
-//                bookShelfFragmentList.add(BookCityFragment.newInstance());
-//                return BookCityFragment.newInstance();
-//            }
-//            default:
-//
-//        }
-//        //return BookShelfFragment.newInstance(tabs[position]);
-//        //return bookShelfFragmentList.get(position);
-//        return null;
-
     }
 
     @Override

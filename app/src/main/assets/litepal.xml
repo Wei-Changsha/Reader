@@ -4,6 +4,6 @@
     <version value="2"></version>
 
     <list>
-        <mapping class="com.example.reader.bean.Bookbean"></mapping>
+        <mapping class="com.example.reader.bean.BookDetail"></mapping>
     </list>
 </litepal>

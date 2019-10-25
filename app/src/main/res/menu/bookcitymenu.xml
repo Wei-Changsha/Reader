@@ -18,11 +18,11 @@
             android:icon="@drawable/icon"
             android:title="排行"
             />
-        <item
-            android:id="@+id/create_data"
-            android:icon="@drawable/icon"
-            android:title="创建数据库"
-            />
+        <!--<item-->
+            <!--android:id="@+id/create_data"-->
+            <!--android:icon="@drawable/icon"-->
+            <!--android:title="创建数据库"-->
+            <!--/>-->
 
     </group>
 

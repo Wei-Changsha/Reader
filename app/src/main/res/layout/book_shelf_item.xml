@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="100sp">
+    <ImageView
+        android:id="@+id/shelf_cover"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/kong"
+        android:paddingLeft="10sp"/>
+    <LinearLayout
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/shelf_book_title"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:text="书名"
+            android:textSize="25sp"
+            android:textColor="#180A0A"
+            android:paddingTop="6sp"
+            android:paddingLeft="5sp"
+            />
+        <TextView
+            android:id="@+id/shelf_last_chapter"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:text="最近更新的章节"
+            android:textSize="20sp"
+            android:paddingTop="8sp"
+            android:paddingLeft="5sp"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".bookcity.bookClassify.BookDetailActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingTop="15dip">
+        <LinearLayout
+            android:id="@+id/Line1"
+            android:layout_width="match_parent"
+            android:layout_height="150sp">
+            <ImageView
+                android:id="@+id/detail_cover_id"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/kong"
+                android:paddingLeft="5sp"
+                />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:paddingTop="5sp"
+                android:paddingLeft="5sp">
+                <TextView
+                    android:id="@+id/detail_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="1"
+
+                    android:text="书名"
+                    />
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/detail_author"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="作者"/>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/detail_last_chapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:text="最近更新"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/detail_chapter_count"
+                        android:layout_width="0sp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="总章节数"/>
+                <TextView
+                    android:id="@+id/detail_word_count"
+                    android:layout_width="0sp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="总字数"/>
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/detail_updated"
+                    android:layout_width="match_parent"
+                    android:layout_height="0sp"
+                    android:layout_weight="1"
+                    android:text="最近更新的时间"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50sp">
+
+            <Button
+                android:id="@+id/bt_add_to_shelf"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="加入书架"
+                android:textSize="20sp"/>
+            <Button
+                android:id="@+id/bt_start_read"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="20sp"
+                android:text="开始阅读"/>
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:paddingTop="15sp"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:textSize="20sp"
+                android:paddingLeft="5sp"
+                android:text="简介" />
+            <TextView
+                android:id="@+id/detail_long_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5sp"
+                android:text="简介内容"/>
+
+            <TextView
+                android:paddingTop="12sp"
+                android:id="@+id/book_comment"
+                android:layout_width="match_parent"
+                android:layout_height="50sp"
+                android:textSize="20sp"
+                android:paddingLeft="5sp"
+                android:text="热门书评"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+    
+
+
+</ScrollView>

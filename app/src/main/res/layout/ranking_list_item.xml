@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="50sp">
+    <ImageView
+        android:id="@+id/rank_img"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/kong"
+        android:paddingLeft="10sp"/>
+    <TextView
+        android:id="@+id/rank_title"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="4"
+        android:paddingTop="8sp"
+        android:text="排行榜名"
+        android:textSize="25sp"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
