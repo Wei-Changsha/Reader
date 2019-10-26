@@ -1,24 +1,16 @@
 package com.example.reader;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reader.bean.BookDetail;
-import com.example.reader.bookcity.bookClassify.ClassifyListActivity;
-import com.example.reader.bookcity.bookListAvtivity.ListActivity;
-import com.example.reader.bookcity.bookListAvtivity.ListAdapter;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -65,7 +57,7 @@ public class BookShelfFragment extends Fragment implements Serializable {
 
 
         //创建adapter
-        BookShelfAdapter adapter=new BookShelfAdapter(bookList,getActivity());//将list数据传到适配器中;
+        BookShelfAdapter adapter=new BookShelfAdapter(bookList,BookShelfFragment.this);//将list数据传到适配器中;
 
         recyclerView.setAdapter(adapter);//给RecyclerView设置adapter
         adapter.notifyDataSetChanged();

@@ -1,7 +1,6 @@
 package com.example.reader;
 
 import android.app.Activity;
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.reader.bean.BookDetail;
+
 import java.util.List;
 
 
@@ -21,12 +20,18 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
     private ImageView imageView;
     private List<BookDetail> bookShelfList;
     private Activity activity;
+    private BookShelfFragment bookShelfFragment;
 
 
     public BookShelfAdapter(List<BookDetail> bookShelfList,Activity activity){
         this.bookShelfList=bookShelfList;
         this.activity=activity;
 
+    }
+
+    public BookShelfAdapter(List<BookDetail> bookList, BookShelfFragment bookShelfFragment) {
+        this.bookShelfList=bookList;
+        this.bookShelfFragment=bookShelfFragment;
     }
 
     public interface OnItemOnClickListener{
@@ -64,12 +69,12 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull BookShelfAdapter.ViewHolder holder, int position) {
-
-        BookDetail bookDetail=bookShelfList.get(position);
-        String imageUrl="http://statics.zhuishushenqi.com"+bookDetail.getCover();
-        Glide.with(activity).load(imageUrl).into(imageView);
-        holder.textBookTitle.setText(bookDetail.getTitle());
-        holder.textBookLastChapter.setText(bookDetail.getLastChapter());
+//        BookDetail bookDetail=bookShelfList.get(position);
+//        Log.d("BookShelfAdapter", "pppp"+String.valueOf(bookShelfList.isEmpty()));
+//        String imageUrl="http://statics.zhuishushenqi.com"+bookDetail.getCover();
+//        Glide.with(activity).load(imageUrl).into(imageView);
+//        holder.textBookTitle.setText(bookDetail.getTitle());
+//        holder.textBookLastChapter.setText(bookDetail.getLastChapter());
 
 
     }

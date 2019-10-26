@@ -1,20 +1,16 @@
 package com.example.reader.bookcity.bookListAvtivity;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.reader.R;
-import com.example.reader.bean.Bookbean;
-import com.example.reader.bookcity.bookClassify.BookDetailActivity;
-import com.example.reader.bookcity.bookClassify.ClassifyListActivity;
-import com.example.reader.bookcity.bookClassify.ClassifyListAdapter;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -35,8 +31,6 @@ public class ListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classify_list);
-        Intent intent=getIntent();
-        //String address=intent.getStringExtra("address");
         String  address="http://api.zhuishushenqi.com/book-list?duration=all&sort=collectorCount&start=0&limit=20&tag=古代&gender=male";
         queryFromServer(address);
     }
@@ -59,7 +53,6 @@ public class ListActivity extends AppCompatActivity {
                 Utility.handleBookListResponse(responseText,bookbeanList);
                 Log.d("ClassifyListActivity","oooQ  "+ String.valueOf(bookbeanList.size()));
 
-
                 runOnUiThread( new Runnable() {
                     @Override
                     public void run() {
@@ -79,9 +72,10 @@ public class ListActivity extends AppCompatActivity {
                                     @Override
                                     public void run() {
                                         ByList.Book bookbean=bookbeanList.get(pos);
-                                        String bookUrl="http://api.zhuishushenqi.com/book/"+bookbean.get_id();
+                                        String bookUrl="http://api.zhuishushenqi.com/book-list/"+bookbean.get_id();
                                         //跳转到书籍详情页
-                                        Intent intent=new Intent(ListActivity.this, BookDetailActivity.class);
+                                        Intent intent=new Intent(ListActivity.this, ListMinActivity.class);
+                                        Log.d("ClassifyListActivity","ggg  "+ bookUrl);
                                         intent.putExtra("bookUrl",bookUrl);
                                         startActivity(intent);
                                         Toast.makeText(ListActivity.this,"跳转到书籍详情页 ", Toast.LENGTH_SHORT).show();

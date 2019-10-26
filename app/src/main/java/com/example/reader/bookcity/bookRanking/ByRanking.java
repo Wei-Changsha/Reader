@@ -2,7 +2,7 @@ package com.example.reader.bookcity.bookRanking;
 
 import java.util.List;
 
-public class ByRanking {
+public class  ByRanking {
 //    {
 //        "male": [
 //        {
@@ -46,7 +46,7 @@ public class ByRanking {
         this.female = female;
     }
 
-    public class Male{
+    public static class Male{
         private String _id;
         private String cover;
         private String title;
@@ -54,6 +54,22 @@ public class ByRanking {
         private String monthRank;
         private String totalRank;
         private String shortTitle;
+
+        public Male(String _id, String cover, String title) {
+            this._id = _id;
+            this.cover = cover;
+            this.title = title;
+        }
+
+        public Male(String _id, String cover, String title, boolean collapse, String monthRank, String totalRank, String shortTitle) {
+            this._id = _id;
+            this.cover = cover;
+            this.title = title;
+            this.collapse = collapse;
+            this.monthRank = monthRank;
+            this.totalRank = totalRank;
+            this.shortTitle = shortTitle;
+        }
 
         public String get_id() {
             return _id;

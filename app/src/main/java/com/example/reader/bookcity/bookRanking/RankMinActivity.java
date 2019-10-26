@@ -1,20 +1,20 @@
 package com.example.reader.bookcity.bookRanking;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.reader.R;
-import com.example.reader.bookcity.bookClassify.ClassifyAvtivity;
-import com.example.reader.bookcity.bookClassify.ClassifyListActivity;
-import com.example.reader.bookcity.bookListAvtivity.ListActivity;
+import com.example.reader.bean.rankBean;
+import com.example.reader.bookcity.bookClassify.BookDetailActivity;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -28,19 +28,20 @@ import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 
-public class RankingActivity extends AppCompatActivity {
-    private List<ByRanking.Female> femaleList;
-    private List<ByRanking.Male> maleList=new ArrayList<>();
+public class RankMinActivity extends AppCompatActivity {
+    private List<rankBean.Ranking.RankBooks> rankBooksList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_classify_list);
-        String  address="http://api.zhuishushenqi.com/ranking/gender";
+        Intent intent=getIntent();
+        String address=intent.getStringExtra("rankAddress");
+        //String  address="http://api.zhuishushenqi.com/book/by-categories?gender=female&type=hot&major=古代言情&minor=穿越时空&start=0&limit=20";
         queryFromServer(address);
     }
 
-    public void queryFromServer( String address){
+    public void queryFromServer(String address){
 
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
@@ -49,7 +50,7 @@ public class RankingActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         e.printStackTrace();
-                        Toast.makeText(RankingActivity.this,"加载失败",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RankMinActivity.this,"加载失败",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -58,25 +59,30 @@ public class RankingActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
 
                 String responseText=response.body().string();
-                Utility.handleBookRankResponse(responseText,maleList);
-                Log.d("RankingActivity","rrr size0=  "+ maleList.size());
+                Utility.handleRankMinResponse(responseText,rankBooksList);
+                Log.d("ClassifyListActivity","oooQ  "+ String.valueOf(rankBooksList.size()));
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        LinearLayoutManager layoutManager=new LinearLayoutManager(RankingActivity.this);
+                        final LinearLayoutManager layoutManager=new LinearLayoutManager(RankMinActivity.this);
                         final RecyclerView recyclerView=findViewById(R.id.recycler_view);
                         recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
 
-                        RankingAdapter adapter=new RankingAdapter(maleList,RankingActivity.this);
-                        Log.d("RankingActivity","rrr size=  "+ maleList.size());
+                        RankingMinAdapter adapter=new RankingMinAdapter(rankBooksList,RankMinActivity.this);
                         recyclerView.setAdapter(adapter);
-                        adapter.setOnItemClickListener(new RankingAdapter.OnItemOnClickListener() {
+                        adapter.setOnItemClickListener(new RankingMinAdapter.OnItemOnClickListener() {
                             @Override
                             public void onItemOnClick(View view, int pos) {
-                                ByRanking.Male maleRank=maleList.get(pos);
-                                String rankUrl="http://api.zhuishushenqi.com/ranking/"+maleRank.get_id();
-                                Intent intent=new Intent(RankingActivity.this, RankMinActivity.class);
-                                intent.putExtra("rankAddress",rankUrl);
+                                recyclerView.setVisibility(View.VISIBLE);
+                                View view1=layoutManager.findViewByPosition(pos);
+                                LinearLayout layout=(LinearLayout)view1;
+                                TextView bookID=layout.findViewById(R.id.book_id);
+                                String bookUrl="http://api.zhuishushenqi.com/book/"+bookID.getText().toString();
+                                Log.d("RankMinActivity","hhh="+bookUrl);
+
+                                Intent intent=new Intent(RankMinActivity.this, BookDetailActivity.class);
+                                intent.putExtra("bookUrl",bookUrl);
                                 startActivity(intent);
                             }
 

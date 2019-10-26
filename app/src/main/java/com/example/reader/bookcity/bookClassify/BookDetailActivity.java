@@ -1,7 +1,5 @@
 package com.example.reader.bookcity.bookClassify;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,19 +9,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.bumptech.glide.Glide;
 import com.example.reader.BookShelfFragment;
-import com.example.reader.MainActivity;
 import com.example.reader.R;
 import com.example.reader.bean.BookDetail;
-import com.example.reader.bookcity.bookListAvtivity.ListActivity;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +67,6 @@ public class BookDetailActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
-
                         ImageView cover=findViewById(R.id.detail_cover_id);
                         TextView textTitle=findViewById(R.id.detail_title);
                         TextView textAuthor=findViewById(R.id.detail_author);

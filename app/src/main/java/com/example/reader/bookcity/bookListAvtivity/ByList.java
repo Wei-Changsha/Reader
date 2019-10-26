@@ -20,32 +20,31 @@ public class ByList {
 //        "ok": true
 //    }
 
+    private int total;
+    private List<Book> bookLists;
+    private boolean ok;
 
-    private String total;
-    private List<Book> bookList;
-    private String ok;
-
-    public String getTotal() {
+    public int getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 
-    public List<Book> getBookList() {
-        return bookList;
+    public List<Book> getBookLists() {
+        return bookLists;
     }
 
-    public void setBookList(List<Book> bookList) {
-        this.bookList = bookList;
+    public void setBookLists(List<Book> bookLists) {
+        this.bookLists = bookLists;
     }
 
-    public String getOk() {
+    public boolean isOk() {
         return ok;
     }
 
-    public void setOk(String ok) {
+    public void setOk(boolean ok) {
         this.ok = ok;
     }
 
@@ -71,6 +70,7 @@ public class ByList {
             this.cover = cover;
             this.bookCount = bookCount;
         }
+
 
         public List<String> getCovers() {
             return covers;

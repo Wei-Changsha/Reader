@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.reader.bookcity.bookClassify.ClassifyAvtivity;
 import com.example.reader.bookcity.bookListAvtivity.ListActivity;
+import com.example.reader.bookcity.bookRanking.RankingActivity;
 import com.google.android.material.navigation.NavigationView;
 
 
@@ -48,6 +49,8 @@ public class BookCityFragment extends BookShelfFragment {
                         return true;
                     }
                     case R.id.rank_list:{
+                        intent=new Intent(getActivity(), RankingActivity.class);
+                        getActivity().startActivity(intent);
                         Log.d("BookCityFragment","bbb排行");
                         return true;
                     }

@@ -1,12 +1,10 @@
 package com.example.reader;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.viewpager.widget.ViewPager;
-
-
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -30,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             //页面滚动事件
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
             }
 
             //页面选择事件
