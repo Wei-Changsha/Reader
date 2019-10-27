@@ -1,10 +1,11 @@
 package com.example.reader;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,10 +30,11 @@ public class BookShelfFragment extends Fragment implements Serializable {
     private static final String ARG_SECTION="section";
     private List<BookDetail> bookList=new ArrayList<>();//recyclerview数组
 
+    static String title;
+
     public BookShelfFragment(){
 
     }
-
 
     //实例化碎片的构造方法
     public static BookShelfFragment newInstance(String setion){
@@ -48,7 +50,9 @@ public class BookShelfFragment extends Fragment implements Serializable {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View view=inflater.inflate(R.layout.fragment_book_shelf,container,false);
 
-        initBook();
+
+
+        //initBook();
 
         //Log.d("BookShelfFragment", "zzz"+bookList.size());
         RecyclerView recyclerView=view.findViewById(R.id.recycler_view_shelf);//获取RecyclerView
@@ -61,33 +65,40 @@ public class BookShelfFragment extends Fragment implements Serializable {
 
         recyclerView.setAdapter(adapter);//给RecyclerView设置adapter
         adapter.notifyDataSetChanged();
-//        adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
-//            @Override
-//            public void onItemOnClick(View view, int pos) {
-//                BookDetail book=bookList.get(pos);
-//
-//                Toast.makeText(getActivity(),book.getTitle(),Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onItemLongOnClick(View view, int pos) {
-//
-//            }
-//        });
+        adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
+            @Override
+            public void onItemOnClick(View view, int pos) {
+                BookDetail book=bookList.get(pos);
+
+                Toast.makeText(getActivity(),book.getTitle(),Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onItemLongOnClick(View view, int pos) {
+
+            }
+        });
 
 
         return view;
     }
 
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+       // Bundle bundle=BookShelfFragment.this.getArguments();
+//        BookDetail book= (BookDetail) bundle.getSerializable("book");
+//        BookDetail book1= (BookDetail) bundle.get("book");
+        //title=bundle.getString("book");
+        Log.d("BookShelfFragment","fff="+title);
 
-    public void initBook( ){
-        BookDetail book;
-        Intent intent= getActivity().getIntent();
-        //bookList= (List<BookDetail>) intent.getSerializableExtra("book");
-        book= (BookDetail) intent.getSerializableExtra("book");
+    }
 
-       // book.save();
-        bookList.add(book);
+
+    public static void initBook(){
+        //Log.d("BookShelfFragment","fff="+book.getTitle());
+        Log.d("BookShelfFragment","fff="+title);
+        //bookList.add(book);
     }
 
 

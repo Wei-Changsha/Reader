@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".bookcity.bookClassify.ReadBookActivity">
+
+    <TextView
+        android:id="@+id/read_title"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="1"
+        android:paddingLeft="20sp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/read_body"
+        android:layout_width="match_parent"
+        android:layout_height="0sp"
+        android:layout_weight="12"
+        android:padding="10sp"
+        android:textSize="17sp"/>
+    <!--<com.bifan.txtreaderlib.main.TxtReaderView-->
+        <!--android:id="@+id/txt_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--/>-->
+
+
+
+
+
+    <!--<com.github.barteksc.pdfviewer.PDFView-->
+        <!--android:id="@+id/pdfView"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center"-->
+            <!--android:orientation="horizontal">-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="0sp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/read_title"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0sp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:paddingLeft="20sp"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/read_body"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0sp"-->
+                    <!--android:layout_weight="12"-->
+                    <!--android:padding="10sp"-->
+                    <!--android:textSize="17sp"/>-->
+
+            <!--</LinearLayout>-->
+
+            <!--<LinearLayout-->
+                <!--android:layout_width="0sp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:orientation="vertical">-->
+                <!--<TextView-->
+                    <!--android:id="@+id/read_title1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0sp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:paddingLeft="20sp"-->
+                    <!--android:textSize="20sp"/>-->
+                <!--<TextView-->
+                    <!--android:id="@+id/read_body1"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="0sp"-->
+                    <!--android:layout_weight="12"-->
+                    <!--android:padding="10sp"-->
+                    <!--android:textSize="17sp"/>-->
+
+            <!--</LinearLayout>-->
+
+
+
+        <!--</LinearLayout>-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/read_title"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0sp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:paddingLeft="20sp"-->
+            <!--android:textSize="20sp"/>-->
+        <!--<TextView-->
+            <!--android:id="@+id/read_body"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0sp"-->
+            <!--android:layout_weight="12"-->
+            <!--android:padding="10sp"-->
+            <!--android:textSize="17sp"/>-->
+
+    <!--</com.github.barteksc.pdfviewer.PDFView>-->
+
+
+
+
+
+</LinearLayout>

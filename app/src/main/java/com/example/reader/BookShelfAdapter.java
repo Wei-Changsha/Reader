@@ -1,6 +1,7 @@
 package com.example.reader;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.reader.bean.BookDetail;
 
 import java.util.List;
@@ -69,12 +71,15 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull BookShelfAdapter.ViewHolder holder, int position) {
-//        BookDetail bookDetail=bookShelfList.get(position);
-//        Log.d("BookShelfAdapter", "pppp"+String.valueOf(bookShelfList.isEmpty()));
-//        String imageUrl="http://statics.zhuishushenqi.com"+bookDetail.getCover();
-//        Glide.with(activity).load(imageUrl).into(imageView);
-//        holder.textBookTitle.setText(bookDetail.getTitle());
-//        holder.textBookLastChapter.setText(bookDetail.getLastChapter());
+        BookDetail bookDetail=bookShelfList.get(position);
+        Log.d("BookShelfAdapter", "pppp"+String.valueOf(bookShelfList.isEmpty()));
+        if (bookDetail!=null){
+            String imageUrl="http://statics.zhuishushenqi.com"+bookDetail.getCover();
+            Glide.with(activity).load(imageUrl).into(imageView);
+            holder.textBookTitle.setText(bookDetail.getTitle());
+            holder.textBookLastChapter.setText(bookDetail.getLastChapter());
+        }
+
 
 
     }

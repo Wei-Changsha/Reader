@@ -402,7 +402,7 @@ public class BookDetail implements Serializable {
         this.discount = discount;
     }
 
-    public class Rating{
+    public class Rating implements Serializable{
         //              "count": 17432,
 //                "score": 8.686,
 //                "isEffect": true

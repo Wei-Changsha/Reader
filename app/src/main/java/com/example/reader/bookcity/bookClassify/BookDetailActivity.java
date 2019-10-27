@@ -10,11 +10,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 import com.example.reader.BookShelfFragment;
 import com.example.reader.R;
 import com.example.reader.bean.BookDetail;
+import com.example.reader.bean.ChapterList;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -32,6 +35,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
 
     private List<BookDetail> bookShelfList=new ArrayList<>();
+    private List< ChapterList.MixToc.Chapters> chaptersList=new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,22 +95,51 @@ public class BookDetailActivity extends AppCompatActivity {
                         final Button btnStartRead=findViewById(R.id.bt_start_read);
 
                         btnAddToShelf.setOnClickListener(new View.OnClickListener() {
+                            boolean flagDoubleCick = false;
+
                             @Override
                             public void onClick(View view) {
-                                Intent intent=new Intent(BookDetailActivity.this, BookShelfFragment.class);
-                                //bookShelfList.add(bookDetail);
-                                if (bookShelfList!=null)
-                                    intent.putExtra("book", bookDetail);
-                                Log.d("BookDetailActivity","mmm"+bookShelfList.isEmpty());
-//                                tag[0] =1;
-                                btnAddToShelf.setText("移出书架");
-                                startActivity(intent);
+                                if (!flagDoubleCick){
+                                    //BookShelfFragment fragment= (BookShelfFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_shelf);
+                                    BookShelfFragment fragment=new BookShelfFragment();
+                                    Bundle bundle=new Bundle();
+                                    bundle.putString("book",bookDetail.getAuthor());
+                                    fragment.setArguments(bundle);
+                                    BookShelfFragment.initBook();
+                                    Log.d("BookDetailActivity","mmm"+bookShelfList.isEmpty());
+                                    Log.d("BookDetailActivity","mmm="+bookDetail.getTitle());
+//
+                                    FragmentManager fragmentManager=getSupportFragmentManager();
+                                    FragmentTransaction transaction=fragmentManager.beginTransaction();
+                                    transaction.attach(fragment);
+                                    transaction.commit();
+                                    btnAddToShelf.setText("移出书架");
+                                    flagDoubleCick = true;
+
+                                }else {
+                                    btnAddToShelf.setText("加入书架");
+                                    flagDoubleCick = false;
+
+                                }
+
+
+
+//                                Intent intent=new Intent(BookDetailActivity.this, BookShelfFragment.class);
+//                                //bookShelfList.add(bookDetail);
+//                                if (bookShelfList!=null)
+//                                    intent.putExtra("book", bookDetail);
+//                                Log.d("BookDetailActivity","mmm"+bookShelfList.isEmpty());
+////                                tag[0] =1;
+//                                btnAddToShelf.setText("移出书架");
+//                                startActivity(intent);
 
                             }
                         });
                         btnStartRead.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                //访问章节总列表
+                                query(bookDetail.get_id());
 
                             }
                         });
@@ -117,21 +150,48 @@ public class BookDetailActivity extends AppCompatActivity {
             }
         });
     }
-//    @Override
-//    public void onClick(View v){
-//        switch (v.getId()){
-//            case R.id.bt_add_to_shelf:{//加入书架和移除书架
+
+
+    //访问章节总列表
+    public void query(String id){
+        String url="http://api.zhuishushenqi.com/mix-atoc/"+id+"?view=chapters";
+        HttpUtil.sendOkHttpRequest(url, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        e.printStackTrace();
+                        Toast.makeText(BookDetailActivity.this,"加载失败",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                String responseText=response.body().string();
+                Utility.handleChapterListResponse(responseText,chaptersList);
+                String linkUrl=chaptersList.get(0).getLink();
+                //String linkUrl=chapters.getLink();
+                String title=chaptersList.get(0).getTitle();
+                Intent intent=new Intent(BookDetailActivity.this,ReadBookActivity.class);
+                intent.putExtra("chapters",chaptersList.get(0));
+                startActivity(intent);
+
+                Log.d("BookDetailActivity","llllink="+linkUrl);
+
+//                runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
 //
-//                break;
-//            }
-//            case R.id.bt_start_read:{//开始阅读
-//
-//                break;
-//            }
-//
-//        }
-//
-//}
+//                    }
+//                });
+
+            }
+        });
+
+    }
 
 }
 

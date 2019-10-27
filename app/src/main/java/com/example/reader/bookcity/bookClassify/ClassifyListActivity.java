@@ -95,7 +95,7 @@ public class ClassifyListActivity extends AppCompatActivity {
                                 intent.putExtra("bookUrl",bookUrl);
                                 startActivity(intent);
 
-                                Toast.makeText(ClassifyListActivity.this,"跳转到书籍详情页 ", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(ClassifyListActivity.this,"跳转到书籍详情页 ", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override//长按点击事件
@@ -104,7 +104,7 @@ public class ClassifyListActivity extends AppCompatActivity {
                             }
                         });
                         Log.d("ClassifyListActivity","oooQq  "+ String.valueOf(bookbeanList.size()));
-                        Toast.makeText(ClassifyListActivity.this,"加载成功",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ClassifyListActivity.this,"加载成功",Toast.LENGTH_SHORT).show();
                     }
                 });
             }

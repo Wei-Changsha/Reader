@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.reader.bean.BookDetail;
 import com.example.reader.bean.Bookbean;
+import com.example.reader.bean.ChapterList;
 import com.example.reader.bean.ListBean;
+import com.example.reader.bean.chapterDetailBean;
 import com.example.reader.bean.rankBean;
 import com.example.reader.bookcity.bookListAvtivity.ByList;
 import com.example.reader.bookcity.bookRanking.ByRanking;
@@ -107,6 +109,25 @@ public class Utility extends AppCompatActivity implements Serializable{
 
     }
 
+    //处理章节列表数据
+    public static void handleChapterListResponse(String response,
+                    List< ChapterList.MixToc.Chapters> chaptersList ){
+        JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+        JsonObject jsonObject1=jsonObject.get("mixToc").getAsJsonObject();
+        String _id=jsonObject1.get("_id").getAsString();
+        JsonArray chapters=jsonObject1.get("chapters").getAsJsonArray();
+        //List< ChapterList.MixToc.Chapters> chaptersList=new ArrayList<>();
+        for (JsonElement cha:chapters){
+            ChapterList.MixToc.Chapters chapters1=new Gson().fromJson(cha,new TypeToken< ChapterList.MixToc.Chapters>()
+            {}.getType());
+            Log.d("Utility","uuu="+chapters1.getLink());
+            chaptersList.add(chapters1);
+
+        }
+        Log.d("Utility","uuusize="+chaptersList.size());
+        //return chaptersList;
+    }
+
     public static void handleListMinResponse(String response, List<ListBean.BookList.Books.Book> bookList){
         //先转JsonObject
         JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
@@ -134,6 +155,19 @@ public class Utility extends AppCompatActivity implements Serializable{
     }
 
 
+    //章节详情
+    public static chapterDetailBean.Chapter handleChapterDetailResponse(String response){
+        //先转JsonObject
+        JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+        JsonObject chapter=jsonObject.get("chapter").getAsJsonObject();
+        String title=chapter.get("title").getAsString();
+        String body=chapter.get("body").getAsString();
+        chapterDetailBean.Chapter chapter1=new chapterDetailBean.Chapter(title,body);
+        Log.d("Utility","rrrtitle="+title);
+        return chapter1;
+}
+
+
 
     //书籍详情
     public static BookDetail handleBookDetailResponse(String response){
@@ -145,7 +179,6 @@ public class Utility extends AppCompatActivity implements Serializable{
         BookDetail bookDetail=new Gson().fromJson(response,BookDetail.class);
         String bookDetailAddress="http://api.zhuishushenqi.com/mix-atoc/"+bookDetail.get_id()+"?view=chapters";
         Log.d("Utility","rrr"+bookDetail.getTitle());
-
         return bookDetail;
 
     }
@@ -162,6 +195,7 @@ public class Utility extends AppCompatActivity implements Serializable{
         return bookDetail;
 
     }
+
 
 
 
