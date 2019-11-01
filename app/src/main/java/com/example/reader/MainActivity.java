@@ -18,10 +18,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        TabLayout tabLayout=findViewById(R.id.tab_layout);
-        viewPager=findViewById(R.id.Vp_findFragment);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        viewPager = findViewById(R.id.Vp_findFragment);
         //初始化适配器
-        adapter=new ViewAdapter(getSupportFragmentManager());
+        adapter = new ViewAdapter(getSupportFragmentManager());
         viewPager.setAdapter(adapter);
         //给viewPaper设置事件监听
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.reader.bean.Book;
 import com.example.reader.bean.BookDetail;
 import com.example.reader.bean.Bookbean;
 import com.example.reader.bean.ChapterList;
@@ -182,7 +183,7 @@ public class Utility extends AppCompatActivity implements Serializable{
         return bookDetail;
 
     }
-    public static BookDetail handleBookDetailResponse(String response,List<BookDetail> booklist){
+    public static BookDetail handleBookDetailResponse(String response,List<Book> booklist){
         //先转JsonObject
         JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
         jsonObject.get("title").getAsString();
@@ -191,7 +192,9 @@ public class Utility extends AppCompatActivity implements Serializable{
         BookDetail bookDetail=new Gson().fromJson(response,BookDetail.class);
         String bookDetailAddress="http://api.zhuishushenqi.com/mix-atoc/"+bookDetail.get_id()+"?view=chapters";
         Log.d("Utility","rrr"+bookDetail.getTitle());
-        booklist.add(bookDetail);
+        Book theBook=new Book(bookDetail.get_id(),bookDetail.getTitle(),bookDetail.getLastChapter(),
+                null,bookDetail.getCover());
+        booklist.add(theBook);
         return bookDetail;
 
     }

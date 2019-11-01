@@ -1,9 +1,13 @@
 package com.example.reader.bean;
 
+import com.google.gson.annotations.SerializedName;
+
+import org.litepal.crud.DataSupport;
+
 import java.io.Serializable;
 import java.util.List;
 
-public class BookDetail implements Serializable {
+public class BookDetail extends DataSupport implements Serializable {
 //             "_id": "5816b415b06d1d32157790b1",
 //             "title": "圣墟",
 //             "author": "辰东",
@@ -52,6 +56,7 @@ public class BookDetail implements Serializable {
 //            "_gg": false,
 //            "discount": null
 
+    @SerializedName("id")
     private String _id;//"5816b415b06d1d32157790b1",
     private String title;//"圣墟",
     private String author;//"辰东",
@@ -63,6 +68,8 @@ public class BookDetail implements Serializable {
     private String creater;
     private Rating rating;
     private int sizetype;//"sizetype": -1,
+
+
 
     private String superscript;//"superscript": "",
     private int currency;
@@ -97,6 +104,14 @@ public class BookDetail implements Serializable {
 
     public BookDetail(){
 
+    }
+
+    public BookDetail(String title, String author, String cover, String lastChapter, String cat) {
+        this.title = title;
+        this.author = author;
+        this.cover = cover;
+        this.lastChapter = lastChapter;
+        this.cat = cat;
     }
 
     public BookDetail(String _id, String title, String author, String longIntro, String cover,

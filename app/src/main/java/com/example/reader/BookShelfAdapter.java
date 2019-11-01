@@ -11,8 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.example.reader.bean.BookDetail;
+import com.example.reader.bean.Book;
 
 import java.util.List;
 
@@ -20,21 +19,28 @@ import java.util.List;
 public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.ViewHolder> {
 
     private ImageView imageView;
-    private List<BookDetail> bookShelfList;
+    private List<Book> bookShelfList;
     private Activity activity;
-    private BookShelfFragment bookShelfFragment;
+    private android.app.Fragment fragment;
+    //private FragmentActivity activity;
+    //private BookShelfFragment bookShelfFragment;
 
 
-    public BookShelfAdapter(List<BookDetail> bookShelfList,Activity activity){
+    public BookShelfAdapter(List<Book> bookShelfList, Activity activity){
         this.bookShelfList=bookShelfList;
         this.activity=activity;
 
     }
 
-    public BookShelfAdapter(List<BookDetail> bookList, BookShelfFragment bookShelfFragment) {
-        this.bookShelfList=bookList;
-        this.bookShelfFragment=bookShelfFragment;
+    public BookShelfAdapter(List<Book> bookShelfList, android.app.Fragment fragment){
+        this.bookShelfList=bookShelfList;
+        this.fragment=fragment;
     }
+
+//    public BookShelfAdapter(List<Book> bookList, BookShelfFragment bookShelfFragment) {
+//        this.bookShelfList=bookList;
+//        this.bookShelfFragment=bookShelfFragment;
+//    }
 
     public interface OnItemOnClickListener{
         void onItemOnClick(View view, int pos);
@@ -70,16 +76,34 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookShelfAdapter.ViewHolder holder, int position) {
-        BookDetail bookDetail=bookShelfList.get(position);
+    public void onBindViewHolder(@NonNull final BookShelfAdapter.ViewHolder holder, final int position) {
+        Book bookDetail=bookShelfList.get(position);
         Log.d("BookShelfAdapter", "pppp"+String.valueOf(bookShelfList.isEmpty()));
         if (bookDetail!=null){
             String imageUrl="http://statics.zhuishushenqi.com"+bookDetail.getCover();
-            Glide.with(activity).load(imageUrl).into(imageView);
+            //Glide.with(fragment).load(imageUrl).into(imageView);
             holder.textBookTitle.setText(bookDetail.getTitle());
-            holder.textBookLastChapter.setText(bookDetail.getLastChapter());
+            holder.textBookLastChapter.setText(bookDetail.getAuthor());
         }
 
+
+
+        if(mOnItemOnClickListener!=null){
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mOnItemOnClickListener.onItemOnClick(holder.itemView,position);
+                }
+            });
+
+            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View view) {
+                    mOnItemOnClickListener.onItemLongOnClick(holder.itemView,position);
+                    return false;
+                }
+            });
+        }
 
 
     }

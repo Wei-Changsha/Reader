@@ -23,7 +23,7 @@
             android:layout_height="0sp"
             android:layout_weight="1"
             android:text="书名"
-            android:textSize="25sp"
+            android:textSize="18sp"
             android:textColor="#180A0A"
             android:paddingTop="6sp"
             android:paddingLeft="5sp"
@@ -34,7 +34,7 @@
             android:layout_height="0sp"
             android:layout_weight="1"
             android:text="最近更新的章节"
-            android:textSize="20sp"
+            android:textSize="15sp"
             android:paddingTop="8sp"
             android:paddingLeft="5sp"/>
 

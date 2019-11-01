@@ -11,12 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 
 import com.example.reader.bookcity.bookClassify.ClassifyAvtivity;
 import com.example.reader.bookcity.bookListAvtivity.ListActivity;
 import com.example.reader.bookcity.bookRanking.RankingActivity;
 import com.google.android.material.navigation.NavigationView;
+
+import org.litepal.LitePal;
 
 
 public class BookCityFragment extends BookShelfFragment {
@@ -54,11 +55,11 @@ public class BookCityFragment extends BookShelfFragment {
                         Log.d("BookCityFragment","bbb排行");
                         return true;
                     }
-//                    case R.id.create_data:{
-//                        LitePal.getDatabase();
-//                        Log.d("BookCityFragment","bbb create data");
-//                        return true;
-//                    }
+                    case R.id.create_data:{
+                        LitePal.getDatabase();
+                        Log.d("BookCityFragment","bbb create data");
+                        return true;
+                    }
                     default:
                 }
                 return true;
