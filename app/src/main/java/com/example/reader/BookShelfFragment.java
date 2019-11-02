@@ -1,7 +1,7 @@
 package com.example.reader;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reader.bean.Book;
+import com.example.reader.bean.ChapterList;
+import com.example.reader.bookcity.bookClassify.ReadBookActivity;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -31,8 +33,10 @@ public class BookShelfFragment extends Fragment implements Serializable {
     private static final String ARG_SECTION = "section";
     private List<Book> bookList = new ArrayList<>();//recyclerview数组
     //private List<BookDetail> bookDetailList=new ArrayList<>();
+    private List<ChapterList.MixToc.Chapters> chaptersList = new ArrayList<>();
 
     static String title;
+    private String bookID;
 
     public BookShelfFragment() {
 
@@ -62,13 +66,15 @@ public class BookShelfFragment extends Fragment implements Serializable {
         //创建adapter
         BookShelfAdapter adapter = new BookShelfAdapter(bookList, getActivity());//将list数据传到适配器中;
 
-        Log.d("BookShelfFragment", "zzz"+bookList.size());
+        //Log.d("BookShelfFragment", "zzz"+bookList.size());
         recyclerView.setAdapter(adapter);//给RecyclerView设置adapter
         adapter.notifyDataSetChanged();
         adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
             @Override
             public void onItemOnClick(View view, int pos) {
                 Book book = bookList.get(pos);
+                query(book.getTag());
+                bookID=book.getTag();
 
                 Toast.makeText(getActivity(), book.getTitle(), Toast.LENGTH_SHORT).show();
             }
@@ -87,65 +93,64 @@ public class BookShelfFragment extends Fragment implements Serializable {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-       // Log.d("BookShelfFragment", "fff=" + title);
-
     }
 
 
     public  void initBook() {
 
         List<Book> books= DataSupport.findAll(Book.class);
-        Log.d("BookShelfFragment", "fff000=" + books.size());
+        //Log.d("BookShelfFragment", "fff000=" + books.size());
         for (Book bookDetail1:books){
-            Log.d("BookShelfFragment", "fff000=" + bookDetail1.getTitle());
+            //Log.d("BookShelfFragment", "fff000=" + bookDetail1.getTitle());
             bookList.add(bookDetail1);
         }
 
     }
 
 
-    public void queryFromServer(String address) {
-        HttpUtil.sendOkHttpRequest(address, new Callback() {
-            @Override
-            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        e.printStackTrace();
-                        //Toast.makeText(BookShelfFragment.this,"加载失败",Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-                String responseText = response.body().string();
-                Utility.handleBookDetailResponse(responseText, bookList);
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-                        final RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view);
-                        recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
-
-                        BookShelfAdapter adapter = new BookShelfAdapter(bookList,getActivity());
-                        recyclerView.setAdapter(adapter);
-                        adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
-                            @Override
-                            public void onItemOnClick(View view, int pos) {
-
-                            }
-
-                            @Override
-                            public void onItemLongOnClick(View view, int pos) {
-
-                            }
-                        });
-                    }
-                });
-            }
-        });
-    }
+//    public void queryFromServer(String address) {
+//        HttpUtil.sendOkHttpRequest(address, new Callback() {
+//            @Override
+//            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        e.printStackTrace();
+//                        //Toast.makeText(BookShelfFragment.this,"加载失败",Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//
+//            @Override
+//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+//                String responseText = response.body().string();
+//                Utility.handleBookDetailResponse(responseText, bookList);
+//                getActivity().runOnUiThread(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+//                        final RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view);
+//                        recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
+//
+//                        BookShelfAdapter adapter = new BookShelfAdapter(bookList,getActivity());
+//                        recyclerView.setAdapter(adapter);
+//                        adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
+//                            @Override
+//                            public void onItemOnClick(View view, int pos) {
+//
+//
+//                            }
+//
+//                            @Override
+//                            public void onItemLongOnClick(View view, int pos) {
+//
+//                            }
+//                        });
+//                    }
+//                });
+//            }
+//        });
+//    }
 
 
     @Override
@@ -153,5 +158,42 @@ public class BookShelfFragment extends Fragment implements Serializable {
         super.onDestroyView();
     }
 
+
+
+    //访问章节总列表
+    public void query(String id) {
+        String url = "http://api.zhuishushenqi.com/mix-atoc/" + id + "?view=chapters";
+        HttpUtil.sendOkHttpRequest(url, new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity(), "加载失败", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                String responseText = response.body().string();
+                Utility.handleChapterListResponse(responseText, chaptersList);
+                String linkUrl = chaptersList.get(0).getLink();
+                //book1.setLink(linkUrl);
+
+                //String linkUrl=chapters.getLink();
+                String title = chaptersList.get(0).getTitle();
+                Intent intent = new Intent(getActivity(), ReadBookActivity.class);
+                intent.putExtra("chapterslink", chaptersList.get(0).getLink());
+                intent.putExtra("bookid",bookID);
+                startActivity(intent);
+               // Log.d("BookDetailActivity", "llllink=" + linkUrl);
+
+            }
+        });
+
+    }
 
 }

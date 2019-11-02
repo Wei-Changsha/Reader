@@ -97,7 +97,7 @@ public class ChapterList {
             this.chapters = chapters;
         }
 
-        public class Chapters implements Serializable {
+        public class Chapters  implements Serializable {
             private String link;
             private String title;
             private boolean unreadble;

@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.example.reader.R;
 import com.example.reader.bean.Book;
+import com.example.reader.bean.BookD;
 import com.example.reader.bean.BookDetail;
 import com.example.reader.bean.ChapterList;
 import com.example.reader.bookcity.util.HttpUtil;
@@ -36,6 +37,7 @@ public class BookDetailActivity extends AppCompatActivity {
     private List<BookDetail> bookShelfList = new ArrayList<>();
     private List<ChapterList.MixToc.Chapters> chaptersList = new ArrayList<>();
     Book book1=new Book();
+    private String bookID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +45,8 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
         Intent intent = getIntent();
         String bookUrl = intent.getStringExtra("bookUrl");
+
+        Log.d("BookDetailActivity", "fff777=" + bookUrl);
         queryFromServer(bookUrl);
 
     }
@@ -90,31 +94,18 @@ public class BookDetailActivity extends AppCompatActivity {
                         textUpdated.setText("更新时间" + bookDetail.getUpdated());
                         textLongIntro.setText(bookDetail.getLongIntro());
 
-//                        final int[] tag = {0};//1---在书架   0----不在书架
                         final Button btnAddToShelf = findViewById(R.id.bt_add_to_shelf);
                         final Button btnStartRead = findViewById(R.id.bt_start_read);
+
+                        Log.d("BookDetailActivity", "fff666=" + bookDetail.get_id());
+                        Log.d("BookDetailActivity", "fff666=" + bookDetail.getAuthor());
 
                         btnAddToShelf.setOnClickListener(new View.OnClickListener() {
                              boolean flagDoubleCick;
 
                             @Override
                             public void onClick(View view) {
-                                //flagDoubleCick=!flagDoubleCick;
                                 if (!flagDoubleCick) {
-                                    //BookShelfFragment fragment= (BookShelfFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_shelf);
-//                                    BookShelfFragment fragment = new BookShelfFragment();
-//                                    Bundle bundle = new Bundle();
-//                                    bundle.putString("book", bookDetail.getAuthor());
-//                                    fragment.setArguments(bundle);
-
-
-
-
-//                                    FragmentManager fragmentManager = getSupportFragmentManager();
-//                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-//                                    transaction.attach(fragment);
-//                                    transaction.commit();
-
 
                                     Log.d("BookDetailActivity", "mmm" + bookShelfList.isEmpty());
                                     Log.d("BookDetailActivity", "mmm=" + bookDetail.getTitle());
@@ -128,7 +119,6 @@ public class BookDetailActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(BookDetailActivity.this, "存储失败", Toast.LENGTH_SHORT).show();
                                     }
-
 
                                     Log.d("BookDetailActivity", "fff2=" + bookDetail.getTitle());
                                     List<Book> books= DataSupport.findAll(Book.class);
@@ -146,17 +136,15 @@ public class BookDetailActivity extends AppCompatActivity {
                                     DataSupport.deleteAll(Book.class,"title=?",bookDetail.getTitle());
                                 }
 
-
-
-
                             }
                         });
                         btnStartRead.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
+                                bookID=bookDetail.get_id();
                                 //访问章节总列表
                                 query(bookDetail.get_id());
-
+                                Log.d("BookDetailActivity", "fff66=" + bookDetail.get_id());
 
                             }
                         });
@@ -170,7 +158,7 @@ public class BookDetailActivity extends AppCompatActivity {
 
 
     //访问章节总列表
-    public void query(String id) {
+    public void query(final String id) {
         String url = "http://api.zhuishushenqi.com/mix-atoc/" + id + "?view=chapters";
         HttpUtil.sendOkHttpRequest(url, new Callback() {
             @Override
@@ -192,26 +180,26 @@ public class BookDetailActivity extends AppCompatActivity {
                 String linkUrl = chaptersList.get(0).getLink();
                 book1.setLink(linkUrl);
 
-                //String linkUrl=chapters.getLink();
+                List<BookD> bookDS= DataSupport.findAll(BookD.class);
+                for (int i=0;i<bookDS.size()-1;i++){
+                    bookDS.get(i).setBody(chaptersList.get(0).getLink());//保存body到bookD
+                    if (bookDS.get(i).getTag()==id)
+                        Log.d("BookDetailActivity", "lll11=true" +id );
+                }
+
                 String title = chaptersList.get(0).getTitle();
                 Intent intent = new Intent(BookDetailActivity.this, ReadBookActivity.class);
-                intent.putExtra("chapters", chaptersList.get(0));
+                intent.putExtra("chapterslink", chaptersList.get(0).getLink());
+                intent.putExtra("bookid",bookID);
+                //intent.putExtra("allChapters", (Serializable) chaptersList);数据太大了 传不了
                 startActivity(intent);
+                Log.d("BookDetailActivity", "llllink=" + id);
 
-                Log.d("BookDetailActivity", "llllink=" + linkUrl);
-
-//                runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                    }
-//                });
 
             }
         });
 
     }
-
 }
 
 

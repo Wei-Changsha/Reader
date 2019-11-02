@@ -7,20 +7,29 @@
     android:orientation="vertical"
     tools:context=".bookcity.bookClassify.ReadBookActivity">
 
-    <TextView
-        android:id="@+id/read_title"
+    <com.example.reader.bookcity.readbok.ScanView
+        android:id="@+id/scanview"
         android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_weight="1"
-        android:paddingLeft="20sp"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/read_body"
-        android:layout_width="match_parent"
-        android:layout_height="0sp"
-        android:layout_weight="12"
-        android:padding="10sp"
-        android:textSize="17sp"/>
+        android:layout_height="match_parent">
+
+    </com.example.reader.bookcity.readbok.ScanView>
+
+
+
+    <!--<TextView-->
+        <!--android:id="@+id/read_title"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0sp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:paddingLeft="20sp"-->
+        <!--android:textSize="20sp"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/read_body"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0sp"-->
+        <!--android:layout_weight="12"-->
+        <!--android:padding="10sp"-->
+        <!--android:textSize="17sp"/>-->
     <!--<com.bifan.txtreaderlib.main.TxtReaderView-->
         <!--android:id="@+id/txt_view"-->
         <!--android:layout_width="match_parent"-->

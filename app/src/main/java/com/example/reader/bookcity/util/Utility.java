@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.reader.bean.Book;
+import com.example.reader.bean.BookD;
 import com.example.reader.bean.BookDetail;
 import com.example.reader.bean.Bookbean;
 import com.example.reader.bean.ChapterList;
@@ -110,22 +111,28 @@ public class Utility extends AppCompatActivity implements Serializable{
 
     }
 
+
     //处理章节列表数据
     public static void handleChapterListResponse(String response,
                     List< ChapterList.MixToc.Chapters> chaptersList ){
         JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
         JsonObject jsonObject1=jsonObject.get("mixToc").getAsJsonObject();
-        String _id=jsonObject1.get("_id").getAsString();
+        String _id=jsonObject1.get("book").getAsString();
         JsonArray chapters=jsonObject1.get("chapters").getAsJsonArray();
+        Log.d("Utility","uuu99="+_id);
+
         //List< ChapterList.MixToc.Chapters> chaptersList=new ArrayList<>();
         for (JsonElement cha:chapters){
             ChapterList.MixToc.Chapters chapters1=new Gson().fromJson(cha,new TypeToken< ChapterList.MixToc.Chapters>()
             {}.getType());
-            Log.d("Utility","uuu="+chapters1.getLink());
+           // Log.d("Utility","uuu999="+chapters1.getLink());
             chaptersList.add(chapters1);
 
+            BookD bookD=new BookD(_id,chapters1.getLink(),chapters1.getTitle(),null);
+            bookD.save();
+            Log.d("Utility","uuusize99="+bookD.getTitle());
         }
-        Log.d("Utility","uuusize="+chaptersList.size());
+
         //return chaptersList;
     }
 
@@ -165,6 +172,8 @@ public class Utility extends AppCompatActivity implements Serializable{
         String body=chapter.get("body").getAsString();
         chapterDetailBean.Chapter chapter1=new chapterDetailBean.Chapter(title,body);
         Log.d("Utility","rrrtitle="+title);
+        String theBody=title+body;
+
         return chapter1;
 }
 
@@ -174,12 +183,24 @@ public class Utility extends AppCompatActivity implements Serializable{
     public static BookDetail handleBookDetailResponse(String response){
         //先转JsonObject
         JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
-        jsonObject.get("title").getAsString();
-        Log.d("Utility","rrr1"+jsonObject.get("title").getAsString());
+        String _id=jsonObject.get("_id").getAsString();
+        String cover=jsonObject.get("cover").getAsString();
+        String title=jsonObject.get("title").getAsString();
+        String author=jsonObject.get("author").getAsString();
+        String wordCount=jsonObject.get("wordCount").getAsString();
+
+        String lastChapter=jsonObject.get("lastChapter").getAsString();
+        String chaptersCount=jsonObject.get("chaptersCount").getAsString();
+        String updated=jsonObject.get("updated").getAsString();
+        String longIntro=jsonObject.get("longIntro").getAsString();
+        BookDetail bookDetail=new BookDetail(title,_id,author,longIntro,cover,
+                Integer.valueOf(wordCount),updated,Integer.valueOf(chaptersCount), lastChapter);
+
+        Log.d("Utility","rrr111"+jsonObject.get("_id").getAsString());
         //再转JsonArray 加上数据头
-        BookDetail bookDetail=new Gson().fromJson(response,BookDetail.class);
+        //BookDetail bookDetail=new Gson().fromJson(response,BookDetail.class);
         String bookDetailAddress="http://api.zhuishushenqi.com/mix-atoc/"+bookDetail.get_id()+"?view=chapters";
-        Log.d("Utility","rrr"+bookDetail.getTitle());
+        Log.d("Utility","rrr000"+bookDetail.get_id());
         return bookDetail;
 
     }
@@ -189,9 +210,21 @@ public class Utility extends AppCompatActivity implements Serializable{
         jsonObject.get("title").getAsString();
         Log.d("Utility","rrr1"+jsonObject.get("title").getAsString());
         //再转JsonArray 加上数据头
-        BookDetail bookDetail=new Gson().fromJson(response,BookDetail.class);
+        //BookDetail bookDetail=new Gson().fromJson(response,BookDetail.class);
+        String _id=jsonObject.get("_id").getAsString();
+        String cover=jsonObject.get("cover").getAsString();
+        String title=jsonObject.get("title").getAsString();
+        String author=jsonObject.get("author").getAsString();
+        String wordCount=jsonObject.get("wordCount").getAsString();
+
+        String lastChapter=jsonObject.get("lastChapter").getAsString();
+        String chaptersCount=jsonObject.get("chaptersCount").getAsString();
+        String updated=jsonObject.get("updated").getAsString();
+        String longIntro=jsonObject.get("longIntro").getAsString();
+        BookDetail bookDetail=new BookDetail(title,_id,author,longIntro,cover,
+                Integer.valueOf(wordCount),updated,Integer.valueOf(chaptersCount), lastChapter);
         String bookDetailAddress="http://api.zhuishushenqi.com/mix-atoc/"+bookDetail.get_id()+"?view=chapters";
-        Log.d("Utility","rrr"+bookDetail.getTitle());
+        Log.d("Utility","rrr222"+bookDetail.getTitle());
         Book theBook=new Book(bookDetail.get_id(),bookDetail.getTitle(),bookDetail.getLastChapter(),
                 null,bookDetail.getCover());
         booklist.add(theBook);

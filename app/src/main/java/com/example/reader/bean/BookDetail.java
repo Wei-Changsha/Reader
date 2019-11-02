@@ -114,27 +114,17 @@ public class BookDetail extends DataSupport implements Serializable {
         this.cat = cat;
     }
 
-    public BookDetail(String _id, String title, String author, String longIntro, String cover,
-                      String majorCate, String minorCate, int postCount, int latelyFollower,
-                      int followerCount, int wordCount, int serializeWordCount, String retentionRatio,
-                      String updated, int chaptersCount, String lastChapter,List<String> tags) {
+    public BookDetail(String title,String _id, String author, String longIntro, String cover, int wordCount,
+                      String updated, int chaptersCount, String lastChapter) {
+        this.title=title;
         this._id = _id;
-        this.title = title;
         this.author = author;
         this.longIntro = longIntro;
         this.cover = cover;
-        this.majorCate = majorCate;
-        this.minorCate = minorCate;
-        this.postCount = postCount;
-        this.latelyFollower = latelyFollower;
-        this.followerCount = followerCount;
         this.wordCount = wordCount;
-        this.serializeWordCount = serializeWordCount;
-        this.retentionRatio = retentionRatio;
         this.updated = updated;
         this.chaptersCount = chaptersCount;
         this.lastChapter = lastChapter;
-        this.tags=tags;
     }
 
     public String getTitle() {
