@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="80sp"
+    android:orientation="horizontal"
+    tools:context=".bookcenter.discussion.DisListActivity">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dis_cover_id"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.9"
+        android:padding="15sp"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/kong"
+        android:paddingLeft="10sp"
+        />
+    <!--<ImageView-->
+        <!--android:id="@+id/dis_cover_id"-->
+        <!--android:layout_width="0sp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_gravity="center_vertical"-->
+        <!--android:background="@drawable/kong"-->
+        <!--android:paddingLeft="10sp"-->
+        <!--/>-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0sp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:paddingLeft="10sp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dis_nickname"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="3sp"
+                android:text="昵称"
+                android:textColor="#B39640"
+                />
+            <TextView
+                android:id="@+id/dis_id"
+                android:layout_width="0sp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:paddingTop="8sp"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="0sp"-->
+            <!--android:layout_weight="1">-->
+            <!--<TextView-->
+                <!--android:id="@+id/book_author"-->
+                <!--android:layout_width="0sp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="作者"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/book_tag"-->
+                <!--android:layout_width="0sp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="标签"/>-->
+
+        <!--</LinearLayout>-->
+
+        <TextView
+            android:id="@+id/dis_comment"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+
+            android:singleLine="true"
+            android:text="评论"
+            android:textColor="#000000"/>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0sp"
+            android:layout_weight="1">
+            <TextView
+                android:id="@+id/dis_commentCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="评论数"/>
+            <TextView
+                android:id="@+id/dis_likeCount"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="喜欢数❤"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

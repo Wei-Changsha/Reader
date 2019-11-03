@@ -14,7 +14,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".bookcity.bookClassify.ReadBookActivity"></activity>
+        <activity android:name=".bookcenter.discussion.DisDetailActivity"></activity>
+        <activity android:name=".bookcenter.discussion.DisListActivity" />
+        <activity android:name=".bookcity.bookClassify.ReadBookActivity" />
         <activity android:name=".bookcity.bookListAvtivity.ListMinActivity" />
         <activity android:name=".bookcity.bookRanking.RankMinActivity" />
         <activity android:name=".bookcity.bookRanking.RankingActivity" />
@@ -22,6 +24,7 @@
         <activity android:name=".bookcity.bookListAvtivity.ListActivity" />
         <activity android:name=".bookcity.bookClassify.ClassifyListActivity" />
         <activity android:name=".bookcity.bookClassify.ClassifyAvtivity" />
+        <activity android:name=".bookcenter.LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

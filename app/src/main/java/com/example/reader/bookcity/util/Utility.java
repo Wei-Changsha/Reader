@@ -9,9 +9,11 @@ import com.example.reader.bean.BookD;
 import com.example.reader.bean.BookDetail;
 import com.example.reader.bean.Bookbean;
 import com.example.reader.bean.ChapterList;
+import com.example.reader.bean.DisDetail;
 import com.example.reader.bean.ListBean;
 import com.example.reader.bean.chapterDetailBean;
 import com.example.reader.bean.rankBean;
+import com.example.reader.bookcenter.discussion.ByDiscussion;
 import com.example.reader.bookcity.bookListAvtivity.ByList;
 import com.example.reader.bookcity.bookRanking.ByRanking;
 import com.google.gson.Gson;
@@ -121,7 +123,6 @@ public class Utility extends AppCompatActivity implements Serializable{
         JsonArray chapters=jsonObject1.get("chapters").getAsJsonArray();
         Log.d("Utility","uuu99="+_id);
 
-        //List< ChapterList.MixToc.Chapters> chaptersList=new ArrayList<>();
         for (JsonElement cha:chapters){
             ChapterList.MixToc.Chapters chapters1=new Gson().fromJson(cha,new TypeToken< ChapterList.MixToc.Chapters>()
             {}.getType());
@@ -158,10 +159,7 @@ public class Utility extends AppCompatActivity implements Serializable{
             Log.d("Utility","kkkt=authour "+theBook.getLongIntro());
             bookList.add(theBook);
         }
-
-
     }
-
 
     //章节详情
     public static chapterDetailBean.Chapter handleChapterDetailResponse(String response){
@@ -176,8 +174,6 @@ public class Utility extends AppCompatActivity implements Serializable{
 
         return chapter1;
 }
-
-
 
     //书籍详情
     public static BookDetail handleBookDetailResponse(String response){
@@ -230,6 +226,29 @@ public class Utility extends AppCompatActivity implements Serializable{
         booklist.add(theBook);
         return bookDetail;
 
+    }
+
+    //获取综合讨论区帖子列表
+    public static void handleDisListResponse(String response, List<ByDiscussion.Posts> postsList){
+        JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+        JsonArray posts=jsonObject.get("posts").getAsJsonArray();
+        for (JsonElement post:posts){
+            ByDiscussion.Posts posts1=new Gson().fromJson(post,new TypeToken<ByDiscussion.Posts>()
+            {}.getType());
+            postsList.add(posts1);
+            Log.d("Utility","uuusize99="+posts1.getAuthor().getNickname());
+        }
+    }
+
+
+    public static DisDetail.Post handleDisDetailResponse(String response){
+        JsonObject jsonObject = new JsonParser().parse(response).getAsJsonObject();
+        JsonObject post=jsonObject.get("post").getAsJsonObject();
+        Gson gson=new Gson();
+        DisDetail disDetail=gson.fromJson(response,DisDetail.class);
+        Log.d("Utility","uuu8888="+disDetail.getPost().getAuthor().getNickname());
+        DisDetail.Post post1=disDetail.getPost();
+        return post1;
     }
 
 

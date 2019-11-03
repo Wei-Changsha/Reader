@@ -33,10 +33,9 @@ import okhttp3.Response;
 
 public class BookDetailActivity extends AppCompatActivity {
 
-
     private List<BookDetail> bookShelfList = new ArrayList<>();
     private List<ChapterList.MixToc.Chapters> chaptersList = new ArrayList<>();
-    Book book1=new Book();
+    private Book book1=new Book();
     private String bookID;
 
     @Override
@@ -45,7 +44,6 @@ public class BookDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_book_detail);
         Intent intent = getIntent();
         String bookUrl = intent.getStringExtra("bookUrl");
-
         Log.d("BookDetailActivity", "fff777=" + bookUrl);
         queryFromServer(bookUrl);
 
