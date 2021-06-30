@@ -10,6 +10,11 @@ public class User extends DataSupport {
 
     public User(){}
 
+    public User(String account, String password) {
+        this.account = account;
+        this.password = password;
+    }
+
     public int getId() {
         return id;
     }

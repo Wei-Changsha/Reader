@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.example.reader.bookcenter.LoginActivity;
 import com.example.reader.bookcenter.discussion.DisListActivity;
+import com.example.reader.bookcenter.loginRxjava.LoginRxJavaActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class BookCenterFragment extends BookShelfFragment {
@@ -49,7 +49,7 @@ public class BookCenterFragment extends BookShelfFragment {
                         return true;
                     }
                     case R.id.book_login:{
-                        intent=new Intent(getActivity(), LoginActivity.class);
+                        intent=new Intent(getActivity(), LoginRxJavaActivity.class);
                         startActivity(intent);
                     }
                     default:

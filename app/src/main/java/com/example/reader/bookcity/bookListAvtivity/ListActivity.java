@@ -81,13 +81,7 @@ public class ListActivity extends AppCompatActivity {
                                         Toast.makeText(ListActivity.this,"跳转到书籍详情页 ", Toast.LENGTH_SHORT).show();
                                     }
                                 }, 100);
-//                                ByList.Book bookbean=bookbeanList.get(pos);
-//                                String bookUrl="http://api.zhuishushenqi.com/book/"+bookbean.get_id();
-//                                //跳转到书籍详情页
-//                                Intent intent=new Intent(ListActivity.this, BookDetailActivity.class);
-//                                intent.putExtra("bookUrl",bookUrl);
-//                                startActivity(intent);
-//                                Toast.makeText(ListActivity.this,"跳转到书籍详情页 ", Toast.LENGTH_SHORT).show();
+//
                             }
 
                             @Override//长按点击事件

@@ -1,14 +1,15 @@
 package com.example.reader.bookcity.bookClassify;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.reader.R;
+import com.example.reader.bookcity.bookClassify.classifyListMvp.CListActivity;
 
 public class ClassifyAvtivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -51,12 +52,12 @@ public class ClassifyAvtivity extends AppCompatActivity implements View.OnClickL
         switch (view.getId()){
             case R.id.nv_gu_yan:{
                 Log.d("ClassifyActivity","aaa nvguyuan0");
-                //跳转到分类列表
+                //跳转到分类列表  MVP 架构test
                 address="http://api.zhuishushenqi.com/book/by-categories?gender=female&type=hot&major=古代言情&minor=穿越时空&start=0&limit=20";
-                intent=new Intent(ClassifyAvtivity.this,ClassifyListActivity.class);
+                intent=new Intent(ClassifyAvtivity.this, CListActivity.class);
                 intent.putExtra("address",address);
                 startActivity(intent);
-                Log.d("ClassifyActivity","aaa nvguyuan1");
+                //Log.d("ClassifyActivity","aaa nvguyuan1");
                 break;
             }
             case R.id.nv_xian_yan:{
@@ -137,7 +138,8 @@ public class ClassifyAvtivity extends AppCompatActivity implements View.OnClickL
                 break;
             }
 
-
+            default:
+                break;
         }
 
     }

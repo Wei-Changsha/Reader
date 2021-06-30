@@ -50,6 +50,7 @@ public class RankingMinAdapter extends RecyclerView.Adapter<RankingMinAdapter.Vi
         TextView latelyFollower;
         TextView retentionRatio;
         TextView bookID;
+
         public ViewHolder(@NonNull View view) {
             super(view);
             bookImg=view.findViewById(R.id.book_cover_id);

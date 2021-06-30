@@ -22,7 +22,7 @@ import org.litepal.LitePal;
 
 public class BookCityFragment extends BookShelfFragment {
     public static BookCityFragment newInstance(){
-        BookCityFragment fragment=new BookCityFragment();
+        BookCityFragment fragment = new BookCityFragment();
         return fragment;
     }
 

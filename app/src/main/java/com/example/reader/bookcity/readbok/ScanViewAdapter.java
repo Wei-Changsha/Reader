@@ -39,8 +39,9 @@ public class ScanViewAdapter extends PageAdapter
     {
         TextView content = view.findViewById(R.id.content);
         TextView tv =  view.findViewById(R.id.index);
-        if ((position - 1) < 0 || (position - 1) >= getCount())
+        if ((position - 1) < 0 || (position - 1) >= getCount()) {
             return;
+        }
 
         content.setText(body);
         tv.setText(items.get(position - 1));

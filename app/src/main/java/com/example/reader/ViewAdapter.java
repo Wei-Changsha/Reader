@@ -24,9 +24,9 @@ public class ViewAdapter extends FragmentPagerAdapter implements Serializable {
 
     //初始化碎片集合
     private void initFragment(){
-        BookShelfFragment bookShelfFragment=BookShelfFragment.newInstance("this is bookshelf");
-        BookCityFragment bookCityFragment=BookCityFragment.newInstance();
-        BookCenterFragment bookCenterFragment=BookCenterFragment.newInstance();
+        BookShelfFragment bookShelfFragment = BookShelfFragment.newInstance("this is bookshelf");
+        BookCityFragment bookCityFragment = BookCityFragment.newInstance();
+        BookCenterFragment bookCenterFragment = BookCenterFragment.newInstance();
         bookShelfFragmentList.add(bookShelfFragment);
         bookShelfFragmentList.add(bookCityFragment);
         bookShelfFragmentList.add(bookCenterFragment);
@@ -41,10 +41,15 @@ public class ViewAdapter extends FragmentPagerAdapter implements Serializable {
 
     @Override
     public int getCount() {
-        return 3;
+        //return 3;
+        //return bookShelfFragmentList.size();
+        return tabs.length;
     }
 
-    //Tab标题为对应页通过getPageTitle()返回的文本
+
+
+    //Tab标题为对应页通过getPageTitle()返回的文本,
+    //ViewPager与TabLayout绑定后，这里获取到PageTitle就是Tab的Text
     @Override
     public CharSequence getPageTitle(int position) {
         return tabs[position];

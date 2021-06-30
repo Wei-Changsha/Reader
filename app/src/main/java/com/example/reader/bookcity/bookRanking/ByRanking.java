@@ -1,8 +1,9 @@
 package com.example.reader.bookcity.bookRanking;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class  ByRanking {
+public class  ByRanking implements Serializable {
 //    {
 //        "male": [
 //        {

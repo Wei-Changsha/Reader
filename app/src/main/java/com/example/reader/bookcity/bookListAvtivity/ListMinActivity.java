@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.reader.R;
 import com.example.reader.bean.ListBean;
 import com.example.reader.bean.rankBean;
-import com.example.reader.bookcity.bookClassify.BookDetailActivity;
+import com.example.reader.bookcity.bookClassify.detailMvp.MVPDetailActivity;
 import com.example.reader.bookcity.bookRanking.RankingMinAdapter;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
@@ -90,9 +90,10 @@ public class ListMinActivity extends AppCompatActivity {
                                 LinearLayout layout=(LinearLayout)view1;
                                 TextView bookID=layout.findViewById(R.id.book_id);
                                 String bookUrl="http://api.zhuishushenqi.com/book/"+bookID.getText().toString();
-                                Log.d("RankMinActivity","hhh="+bookUrl);
+                                Log.d("RankMinActivity","rrrrrxjava="+bookUrl);
 
-                                Intent intent=new Intent(ListMinActivity.this, BookDetailActivity.class);
+                               // Intent intent=new Intent(ListMinActivity.this, rxDetailActivity.class);
+                                Intent intent=new Intent(ListMinActivity.this, MVPDetailActivity.class);
                                 intent.putExtra("bookUrl",bookUrl);
                                 startActivity(intent);
                             }

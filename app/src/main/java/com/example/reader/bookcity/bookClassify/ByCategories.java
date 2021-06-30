@@ -4,6 +4,9 @@ import com.example.reader.bean.Bookbean;
 
 import java.util.List;
 
+/**
+ * @author wei
+ */
 public class ByCategories {
     private String total;
     private List<Bookbean> bookbeans;
@@ -16,6 +19,7 @@ public class ByCategories {
     public void setTotal(String total) {
         this.total = total;
     }
+
 
     public List<Bookbean> getBookbeans() {
         return bookbeans;
@@ -34,14 +38,10 @@ public class ByCategories {
     }
 
     @Override
-
     public String toString() {
         return "ByCategories [total=" + total +
                 ", bookbeans=" + bookbeans +
-                ",ok="+ok+"]";
+                ",ok=" + ok + "]";
     }
-
-
-
 
 }

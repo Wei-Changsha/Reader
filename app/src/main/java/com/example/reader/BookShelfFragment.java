@@ -37,6 +37,7 @@ public class BookShelfFragment extends Fragment implements Serializable {
 
     static String title;
     private String bookID;
+    BookShelfAdapter adapter;
 
     public BookShelfFragment() {
 
@@ -62,13 +63,12 @@ public class BookShelfFragment extends Fragment implements Serializable {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getActivity());
         recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
 
-
         //创建adapter
-        BookShelfAdapter adapter = new BookShelfAdapter(bookList, getActivity());//将list数据传到适配器中;
+        adapter = new BookShelfAdapter(bookList, getActivity());//将list数据传到适配器中;
 
-        //Log.d("BookShelfFragment", "zzz"+bookList.size());
-        recyclerView.setAdapter(adapter);//给RecyclerView设置adapter
         adapter.notifyDataSetChanged();
+        recyclerView.setAdapter(adapter);//给RecyclerView设置adapter
+
         adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
             @Override
             public void onItemOnClick(View view, int pos) {
@@ -95,6 +95,11 @@ public class BookShelfFragment extends Fragment implements Serializable {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //adapter.notifyDataSetChanged();
+    }
 
     public  void initBook() {
 
@@ -107,50 +112,6 @@ public class BookShelfFragment extends Fragment implements Serializable {
 
     }
 
-
-//    public void queryFromServer(String address) {
-//        HttpUtil.sendOkHttpRequest(address, new Callback() {
-//            @Override
-//            public void onFailure(@NotNull Call call, @NotNull final IOException e) {
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        e.printStackTrace();
-//                        //Toast.makeText(BookShelfFragment.this,"加载失败",Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
-//                String responseText = response.body().string();
-//                Utility.handleBookDetailResponse(responseText, bookList);
-//                getActivity().runOnUiThread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-//                        final RecyclerView recyclerView = getActivity().findViewById(R.id.recycler_view);
-//                        recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
-//
-//                        BookShelfAdapter adapter = new BookShelfAdapter(bookList,getActivity());
-//                        recyclerView.setAdapter(adapter);
-//                        adapter.setOnItemClickListener(new BookShelfAdapter.OnItemOnClickListener() {
-//                            @Override
-//                            public void onItemOnClick(View view, int pos) {
-//
-//
-//                            }
-//
-//                            @Override
-//                            public void onItemLongOnClick(View view, int pos) {
-//
-//                            }
-//                        });
-//                    }
-//                });
-//            }
-//        });
-//    }
 
 
     @Override

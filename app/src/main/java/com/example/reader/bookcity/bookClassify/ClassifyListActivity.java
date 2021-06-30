@@ -2,7 +2,6 @@ package com.example.reader.bookcity.bookClassify;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.reader.R;
 import com.example.reader.bean.Bookbean;
+import com.example.reader.bookcity.bookClassify.detailRxjava.rxDetailActivity;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -59,7 +59,7 @@ public class ClassifyListActivity extends AppCompatActivity {
             public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
                 String responseText=response.body().string();
                 Utility.handleBookDataResponse(responseText,bookbeanList);
-                Log.d("ClassifyListActivity","oooQ  "+ String.valueOf(bookbeanList.size()));
+
 
 
                 runOnUiThread(new Runnable() {
@@ -69,7 +69,7 @@ public class ClassifyListActivity extends AppCompatActivity {
                         final RecyclerView recyclerView=findViewById(R.id.recycler_view);
                         recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
 
-                        Log.d("ClassifyListActivity","oooc  "+ bookbeanList.size());
+
                         final ClassifyListAdapter adapter=new ClassifyListAdapter(bookbeanList,ClassifyListActivity.this);//将list数据传到适配器中;
 
                         recyclerView.setAdapter(adapter);
@@ -79,23 +79,19 @@ public class ClassifyListActivity extends AppCompatActivity {
                             public void onItemOnClick(View view, final int pos) {
                                 recyclerView.setVisibility(View.VISIBLE);
                                 View view1=layoutManager.findViewByPosition(pos);
-                                LinearLayout layout=(LinearLayout)view1;
-                                TextView bookID=layout.findViewById(R.id.book_id);
-                                TextView bookTitle=layout.findViewById(R.id.book_title);
+                                LinearLayout layout = (LinearLayout)view1;
+                                TextView bookID = layout.findViewById(R.id.book_id);
+                                //TextView bookTitle=layout.findViewById(R.id.book_title);
                                 adapter.getViewHolderMap().get(pos);
-                                //map.put(bookID.getText().toString(),bookTitle.getText().toString());
-                                //String id= "http://api.zhuishushenqi.com/book/"+ bookTitle.getText();
 
-                               // Bookbean bookbean=bookbeanList.get(pos);
-                                String bookUrl="http://api.zhuishushenqi.com/book/"+bookID.getText().toString();
+                                String bookUrl = bookID.getText().toString();
                                 //跳转到书籍详情页
-                                Log.d("ClassifyListActivity","iii="+bookUrl);
-                                //Log.d("ClassifyListActivity","iii id="+id);
-                                Intent intent=new Intent(ClassifyListActivity.this,BookDetailActivity.class);
+                                //Log.d("ClassifyListActivity","iii="+bookUrl);
+
+                                Intent intent=new Intent(ClassifyListActivity.this, rxDetailActivity.class);
                                 intent.putExtra("bookUrl",bookUrl);
                                 startActivity(intent);
 
-                                //Toast.makeText(ClassifyListActivity.this,"跳转到书籍详情页 ", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override//长按点击事件
@@ -103,15 +99,13 @@ public class ClassifyListActivity extends AppCompatActivity {
 
                             }
                         });
-                        Log.d("ClassifyListActivity","oooQq  "+ String.valueOf(bookbeanList.size()));
-                        //Toast.makeText(ClassifyListActivity.this,"加载成功",Toast.LENGTH_SHORT).show();
                     }
                 });
             }
 
 
         });
-        Log.d("ClassifyListActivity","oooA  "+ String.valueOf(bookbeanList.size()));
+
 
     }
 

@@ -1,20 +1,16 @@
 package com.example.reader.bookcity.bookRanking;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.reader.R;
-import com.example.reader.bookcity.bookClassify.ClassifyAvtivity;
-import com.example.reader.bookcity.bookClassify.ClassifyListActivity;
-import com.example.reader.bookcity.bookListAvtivity.ListActivity;
 import com.example.reader.bookcity.util.HttpUtil;
 import com.example.reader.bookcity.util.Utility;
 
@@ -41,6 +37,8 @@ public class RankingActivity extends AppCompatActivity {
     }
 
     public void queryFromServer( String address){
+        //Observable<ByRanking> maleAndFemale = BookApi.getInstance();
+        //Subscription s = BookApi.getInstance()
 
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override

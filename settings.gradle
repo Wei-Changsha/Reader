@@ -1,1 +1,3 @@
+include ':Readerapp'
+include ':EasyAdapterLibrary'
 include ':app'

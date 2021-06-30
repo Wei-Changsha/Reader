@@ -1,7 +1,6 @@
 package com.example.reader;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +36,6 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
         this.fragment=fragment;
     }
 
-//    public BookShelfAdapter(List<Book> bookList, BookShelfFragment bookShelfFragment) {
-//        this.bookShelfList=bookList;
-//        this.bookShelfFragment=bookShelfFragment;
-//    }
 
     public interface OnItemOnClickListener{
         void onItemOnClick(View view, int pos);
@@ -51,15 +46,6 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
     private OnItemOnClickListener mOnItemOnClickListener;
     public void setOnItemClickListener(OnItemOnClickListener listener){
         this.mOnItemOnClickListener = listener;
-
-    }
-
-    @NonNull
-    @Override
-    public BookShelfAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.book_shelf_item,parent,false);
-        ViewHolder holder=new ViewHolder(view);
-        return holder;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -75,10 +61,19 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
         }
     }
 
+    @NonNull
+    @Override
+    public BookShelfAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.book_shelf_item,parent,false);
+        ViewHolder holder=new ViewHolder(view);
+        return holder;
+    }
+
+
     @Override
     public void onBindViewHolder(@NonNull final BookShelfAdapter.ViewHolder holder, final int position) {
         Book bookDetail=bookShelfList.get(position);
-        Log.d("BookShelfAdapter", "pppp"+String.valueOf(bookShelfList.isEmpty()));
+        //Log.d("BookShelfAdapter", "pppp"+String.valueOf(bookShelfList.isEmpty()));
         if (bookDetail!=null){
             String imageUrl="http://statics.zhuishushenqi.com"+bookDetail.getCover();
             //Glide.with(fragment).load(imageUrl).into(imageView);
@@ -104,14 +99,7 @@ public class BookShelfAdapter extends RecyclerView.Adapter<BookShelfAdapter.View
                 }
             });
         }
-
-
     }
-
-
-
-
-
 
     @Override
     public int getItemCount() {

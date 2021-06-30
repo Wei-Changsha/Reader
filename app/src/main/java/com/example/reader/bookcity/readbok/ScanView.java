@@ -33,6 +33,7 @@ public class ScanView extends RelativeLayout {
     private boolean isPreMoving = true, isCurrMoving = true;
     // 当前是第几页
     private int index;
+
     private float lastX;
     // 前一页，当前页，下一页的左边位置
     private int prePageLeft = 0, currPageLeft = 0, nextPageLeft = 0;
@@ -87,57 +88,51 @@ public class ScanView extends RelativeLayout {
         adapter.addContent(nextPage, index + 1);
     }
 
-    /**
-     * 向左滑。注意可以滑动的页面只有当前页和前一页
-     *
-     * @param which
-     */
 
+    //向左滑。注意可以滑动的页面只有当前页和前一页
     private void moveLeft(int which) {
 
         switch (which) {
             case PRE:
                 prePageLeft -= MOVE_SPEED;
-                if (prePageLeft < -mWidth)
+                if (prePageLeft < -mWidth) {
                     prePageLeft = -mWidth;
+                }
                 right = mWidth + prePageLeft;
                 break;
             case CURR:
                 currPageLeft -= MOVE_SPEED;
-                if (currPageLeft < -mWidth)
+                if (currPageLeft < -mWidth) {
                     currPageLeft = -mWidth;
+                }
                 right = mWidth + currPageLeft;
                 break;
         }
     }
 
-    /**
-     * 向右滑。注意可以滑动的页面只有当前页和前一页
-     *
-     * @param which
-     */
 
+    //向右滑。注意可以滑动的页面只有当前页和前一页（这里应该是后一页吧）
     private void moveRight(int which) {
         switch (which) {
             case PRE:
                 prePageLeft += MOVE_SPEED;
-                if (prePageLeft > 0)
+                if (prePageLeft > 0) {
                     prePageLeft = 0;
+                }
                 right = mWidth + prePageLeft;
                 break;
             case CURR:
                 currPageLeft += MOVE_SPEED;
-                if (currPageLeft > 0)
+                if (currPageLeft > 0) {
                     currPageLeft = 0;
+                }
                 right = mWidth + currPageLeft;
                 break;
         }
     }
 
-    /**
-     * 当往回翻过一页时添加前一页在最左边
-     */
 
+    //当往回翻过一页时添加前一页在最左边
     private void addPrePage() {
         removeView(nextPage);
         addView(nextPage, -1, new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -153,10 +148,8 @@ public class ScanView extends RelativeLayout {
     }
 
 
-    /**
-     * 当往前翻过一页时，添加一页在最底下
-     */
 
+    //当往前翻过一页时，添加一页在最底下
     private void addNextPage() {
         removeView(prePage);
         addView(prePage, 0, new LayoutParams(LayoutParams.MATCH_PARENT,
@@ -176,8 +169,9 @@ public class ScanView extends RelativeLayout {
     Handler updateHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            if (state != STATE_MOVE)
+            if (state != STATE_MOVE) {
                 return;
+            }
             // 移动页面
             // 翻回，先判断当前哪一页处于未返回状态
             if (prePageLeft > -mWidth && speed <= 0) {
@@ -233,9 +227,8 @@ public class ScanView extends RelativeLayout {
         init();
     }
 
-    /**
-     * 退出动画翻页
-     */
+
+    //退出动画翻页
     public void quitMove() {
         if (mTask != null) {
             mTask.cancel();
@@ -252,10 +245,8 @@ public class ScanView extends RelativeLayout {
     }
 
 
-    /**
-     * 释放动作，不限制手滑动方向
-     */
 
+    //释放动作，不限制手滑动方向
     private void releaseMoving() {
         isPreMoving = true;
         isCurrMoving = true;
@@ -264,7 +255,7 @@ public class ScanView extends RelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
-        if (adapter != null)
+        if (adapter != null) {
             switch (event.getActionMasked()) {
                 case MotionEvent.ACTION_DOWN:
                     lastX = event.getX();
@@ -308,9 +299,9 @@ public class ScanView extends RelativeLayout {
                             // 非第一页
                             prePageLeft += (int) moveLenght;
                             // 防止滑过边界
-                            if (prePageLeft > 0)
+                            if (prePageLeft > 0) {
                                 prePageLeft = 0;
-                            else if (prePageLeft < -mWidth) {
+                            } else if (prePageLeft < -mWidth) {
                                 // 边界判断，释放动作，防止来回滑动导致滑动前一页时当前页无法滑动
                                 prePageLeft = -mWidth;
                                 releaseMoving();
@@ -330,9 +321,9 @@ public class ScanView extends RelativeLayout {
                         } else {
                             currPageLeft += (int) moveLenght;
                             // 防止滑过边界
-                            if (currPageLeft < -mWidth)
+                            if (currPageLeft < -mWidth) {
                                 currPageLeft = -mWidth;
-                            else if (currPageLeft > 0) {
+                            } else if (currPageLeft > 0) {
                                 // 边界判断，释放动作，防止来回滑动导致滑动当前页是前一页无法滑动
                                 currPageLeft = 0;
                                 releaseMoving();
@@ -341,15 +332,17 @@ public class ScanView extends RelativeLayout {
                             state = STATE_MOVE;
                         }
 
-                    } else
+                    } else {
                         mEvents = 0;
+                    }
                     lastX = event.getX();
                     requestLayout();
                     break;
 
                 case MotionEvent.ACTION_UP:
-                    if (Math.abs(speed) < speed_shake)
+                    if (Math.abs(speed) < speed_shake) {
                         speed = 0;
+                    }
                     quitMove();
                     mTask = new MyTimerTask(updateHandler);
                     timer.schedule(mTask, 0, 5);
@@ -365,6 +358,7 @@ public class ScanView extends RelativeLayout {
                     break;
 
             }
+        }
         super.dispatchTouchEvent(event);
         return true;
 
@@ -378,8 +372,9 @@ public class ScanView extends RelativeLayout {
     @Override
     protected void dispatchDraw(Canvas canvas) {
         super.dispatchDraw(canvas);
-        if (right == 0 || right == mWidth)
+        if (right == 0 || right == mWidth) {
             return;
+        }
         RectF rectF = new RectF(right, 0, mWidth, mHeight);
         Paint paint = new Paint();
         paint.setAntiAlias(true);
@@ -407,8 +402,9 @@ public class ScanView extends RelativeLayout {
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        if (adapter == null)
+        if (adapter == null) {
             return;
+        }
 
         prePage.layout(prePageLeft, 0,
                 prePageLeft + prePage.getMeasuredWidth(),
