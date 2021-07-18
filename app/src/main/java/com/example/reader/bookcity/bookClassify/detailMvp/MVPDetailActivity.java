@@ -56,10 +56,11 @@ public class MVPDetailActivity extends BaseActivity<MVPDetailPresenter,IDetailCo
     public void findView() {
         Intent intent = getIntent();
         String bookId = intent.getStringExtra("bookUrl");
-        getContract().requestBookDetail(bookId);//这里才是真正开始的发送请求
+
+        getContract().requestBookDetail(bookId);
+        //这里才是真正开始的发送请求
 
         cover = findViewById(R.id.detail_cover_id);
-
         textTitle = findViewById(R.id.detail_title);
         textAuthor = findViewById(R.id.detail_author);
         textWordCount = findViewById(R.id.detail_word_count);
@@ -78,7 +79,6 @@ public class MVPDetailActivity extends BaseActivity<MVPDetailPresenter,IDetailCo
     public void initView(BookDetail bookDetail) {
         String imageUrl = "http://statics.zhuishushenqi.com" + bookDetail.getCover();
         Glide.with(this).load(imageUrl).into(cover);
-
         textTitle.setText(bookDetail.getTitle());
         textAuthor.setText("作者：" + bookDetail.getAuthor());
         textWordCount.setText("字数：" + bookDetail.getWordCount());

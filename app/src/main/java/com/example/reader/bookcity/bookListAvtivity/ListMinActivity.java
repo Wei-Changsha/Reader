@@ -2,7 +2,6 @@ package com.example.reader.bookcity.bookListAvtivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -69,9 +68,9 @@ public class ListMinActivity extends AppCompatActivity {
                             book.getCover(),book.getSite(),book.getBanned(),book.getLatelyFollower(),
                             String.valueOf(book.getRetentionRatio()));
                     rankBooksList.add(mBook);
-                    Log.d("ListMinActivity","ooozzz  "+ book.getTitle());
+                    //Log.d("ListMinActivity","ooozzz  "+ book.getTitle());
                 }
-                Log.d("ListMinActivity","oooQ  "+ String.valueOf(bookMinList.size()));
+                //Log.d("ListMinActivity","oooQ  "+ String.valueOf(bookMinList.size()));
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -81,18 +80,18 @@ public class ListMinActivity extends AppCompatActivity {
 
                         RankingMinAdapter adapter=new RankingMinAdapter(rankBooksList,ListMinActivity.this);
                         recyclerView.setAdapter(adapter);
-                        Log.d("RankMinActivity","hhhrr="+rankBooksList.size());
+
                         adapter.setOnItemClickListener(new RankingMinAdapter.OnItemOnClickListener() {
                             @Override
                             public void onItemOnClick(View view, int pos) {
                                 recyclerView.setVisibility(View.VISIBLE);
-                                View view1=layoutManager.findViewByPosition(pos);
-                                LinearLayout layout=(LinearLayout)view1;
-                                TextView bookID=layout.findViewById(R.id.book_id);
+                                //View view1=layoutManager.findViewByPosition(pos);  这里view == view1
+                                LinearLayout layout=(LinearLayout)view;
+                                TextView bookID = layout.findViewById(R.id.book_id);
                                 String bookUrl="http://api.zhuishushenqi.com/book/"+bookID.getText().toString();
-                                Log.d("RankMinActivity","rrrrrxjava="+bookUrl);
+                                // Log.d("RankMinActivity","rrrrrxjava="+bookUrl);
 
-                               // Intent intent=new Intent(ListMinActivity.this, rxDetailActivity.class);
+                                // Intent intent=new Intent(ListMinActivity.this, rxDetailActivity.class);
                                 Intent intent=new Intent(ListMinActivity.this, MVPDetailActivity.class);
                                 intent.putExtra("bookUrl",bookUrl);
                                 startActivity(intent);

@@ -1,14 +1,15 @@
 package com.example.reader.Api;
 
 import com.example.reader.bean.BookDetail;
-import com.example.reader.bean.Bookbean;
 import com.example.reader.bean.rankBean;
 import com.example.reader.bookcity.bookRanking.ByRanking;
+import com.example.reader.data.ClassifyListBody;
 
 import java.util.List;
 
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 /**
@@ -27,14 +28,16 @@ public interface BookApiService {
     @GET("/book/{bookId}")
     Observable<BookDetail> getBookDetail(@Path("bookId") String bookId);
 
-    @GET("/book/by-categories?gender={male}&type={hot}&major={玄幻}&minor={东方玄幻}&start={0}&limit={20}")
-    Observable<List<Bookbean>> getClassifyList(
-            @Path("gender") String gender,
-            @Path("type") String type,
-            @Path("major") String major,
-            @Path("minor") String minor,
-            @Path("start") int start,
-            @Path("limit") int limit) ;
+    //book/by-categories?gender={gender}&type={type}&major={major}&minor={minor}&start={start}&limit={limit}
+    @GET("/book/by-categories")
+    Observable<ClassifyListBody> getClassifyList(
+            @Query("gender") String gender,
+            @Query("type") String type,
+            @Query("major") String major,
+            @Query("minor") String minor,
+            @Query("start") int start,
+            @Query("limit") int limit
+    ) ;
 
 
 }

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
-import com.example.reader.bookcity.bookClassify.ClassifyAvtivity;
+import com.example.reader.bookcity.bookClassify.ClassifyActivity;
 import com.example.reader.bookcity.bookListAvtivity.ListActivity;
 import com.example.reader.bookcity.bookRanking.RankingActivity;
 import com.google.android.material.navigation.NavigationView;
@@ -38,7 +38,7 @@ public class BookCityFragment extends BookShelfFragment {
                 Intent intent=null;
                 switch(menuItem.getItemId()) {
                     case R.id.classify:{
-                        intent=new Intent(getActivity(), ClassifyAvtivity.class);
+                        intent=new Intent(getActivity(), ClassifyActivity.class);
                         getActivity().startActivity(intent);
                         Log.d("BookCityFragment","bbb分类");
                         return true;

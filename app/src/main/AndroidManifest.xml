@@ -25,7 +25,7 @@
 
         <activity android:name=".bookcity.bookListAvtivity.ListActivity" />
         <activity android:name=".bookcity.bookClassify.ClassifyListActivity" />
-        <activity android:name=".bookcity.bookClassify.ClassifyAvtivity" />
+        <activity android:name=".bookcity.bookClassify.ClassifyActivity" />
         <activity android:name=".bookcenter.LoginActivity" />
         <activity android:name=".bookcity.bookClassify.classifyListMvp.CListActivity" />
         <activity android:name=".MainActivity">
@@ -36,6 +36,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".bookcity.bookClassify.detailRxjava.rxDetailActivity" />
+        <activity android:name=".bookcity.bookClassify.classifyListRxjava.rxClassifyListActivity" />
+        <activity android:name=".bookcity.bookClassify.detailMVVM.DetailMVVMActivity" />
     </application>
 
 </manifest>

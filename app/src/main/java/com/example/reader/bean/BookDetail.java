@@ -57,9 +57,9 @@ public class BookDetail extends DataSupport implements Serializable {
 //            "discount": null
 
     @SerializedName("id")
-    private String _id;//"5816b415b06d1d32157790b1",
-    private String title;//"圣墟",
-    private String author;//"辰东",
+    private String _id; //"5816b415b06d1d32157790b1",
+    private String title; //"圣墟",
+    private String author; //"辰东",
     private String longIntro;// "在破败中崛起，在寂灭中复苏。沧海成尘，雷电枯竭，那一缕幽雾又一次临近大地，世间的枷锁被打开了，一个全新的世界就此揭开神秘的一角……",
     private String cover;//"/agent/http%3A%2F%2Fimg.1391.com%2Fapi%2Fv1%2Fbookcenter%2Fcover%2F1%2F1228859%2F_1228859_441552.jpg%2F",
 

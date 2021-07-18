@@ -1,7 +1,7 @@
 package com.example.reader.bookcity.bookClassify;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.reader.R;
 import com.example.reader.bean.Bookbean;
+import com.example.reader.bean.CONSTANT;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,30 +25,43 @@ public class ClassifyListAdapter extends RecyclerView.Adapter<ClassifyListAdapte
     private List<Bookbean> bookbeanList;
     private Activity activity;
     private ImageView bookImg;
-    private Map viewHolderMap=new HashMap<>();
-
+    private Map viewHolderMap = new HashMap<>();
 
 
     public Map getViewHolderMap() {
         return viewHolderMap;
     }
+    /**
+     * 监听事件的接口，包括点击事件和长按事件
+     */
+    public interface OnItemOnClickListener {
+        /**
+         * 短点击事件的监听
+         * @param view RecyclerView所对应的子项ItemView
+         * @param pos  ItemView的位置（可以通过pos获取list的具体子项）
+         */
+        void onItemOnClick(View view, int pos);
 
-
-    public interface OnItemOnClickListener{
-        void onItemOnClick(View view,int pos);
-        void onItemLongOnClick(View view ,int pos);
+        /**
+         * 长按点击事件的监听
+         * @param view
+         * @param pos
+         */
+        void onItemLongOnClick(View view, int pos);
     }
 
-    //设置监听的方法和声明了一个这个接口的内部变量    供外部来设置监听
+    /**
+     * 设置监听的方法和声明了一个这个接口的内部变量    供外部来设置监听
+     */
     private OnItemOnClickListener mOnItemOnClickListener;
-    public void setOnItemClickListener(OnItemOnClickListener listener){
+    public void setOnItemClickListener(OnItemOnClickListener listener) {
         this.mOnItemOnClickListener = listener;
 
     }
 
-    public ClassifyListAdapter(List<Bookbean> bookbeanList1, Activity  activity){
-        this.bookbeanList=bookbeanList1;
-        this.activity=activity;
+    public ClassifyListAdapter(List<Bookbean> bookbeanList1, Activity activity) {
+        this.bookbeanList = bookbeanList1;
+        this.activity = activity;
     }
 
 
@@ -57,7 +71,7 @@ public class ClassifyListAdapter extends RecyclerView.Adapter<ClassifyListAdapte
 //        notifyItemRemoved(pos);
 //    }
 
-    public  class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView bookTitle;
         TextView bookAuthor;
         TextView bookTag;
@@ -65,16 +79,17 @@ public class ClassifyListAdapter extends RecyclerView.Adapter<ClassifyListAdapte
         TextView bookPersonNum;
         TextView bookSave;
         TextView bookID;
+
         public ViewHolder(View view) {
             super(view);
-            bookImg=view.findViewById(R.id.book_cover_id);
-            bookTitle=view.findViewById(R.id.book_title);
-            bookAuthor=view.findViewById(R.id.book_author);
-            bookTag=view.findViewById(R.id.book_tag);
-            bookInfo=view.findViewById(R.id.book_info);
-            bookPersonNum=view.findViewById(R.id.book_preson_num);
-            bookSave=view.findViewById(R.id.book_save);
-            bookID=view.findViewById(R.id.book_id);
+            bookImg = view.findViewById(R.id.book_cover_id);
+            bookTitle = view.findViewById(R.id.book_title);
+            bookAuthor = view.findViewById(R.id.book_author);
+            bookTag = view.findViewById(R.id.book_tag);
+            bookInfo = view.findViewById(R.id.book_info);
+            bookPersonNum = view.findViewById(R.id.book_preson_num);
+            bookSave = view.findViewById(R.id.book_save);
+            bookID = view.findViewById(R.id.book_id);
 
         }
     }
@@ -88,45 +103,46 @@ public class ClassifyListAdapter extends RecyclerView.Adapter<ClassifyListAdapte
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.book_list_item,parent,false);
-        ViewHolder holder=new ViewHolder(view);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book_list_item, parent, false);
+        ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public  void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         viewHolderMap.put(position, holder);
         //得到当前bookbean实例
-        final Bookbean bookbean=bookbeanList.get(position);
+        Bookbean bookbean = bookbeanList.get(position);
 
+        //书籍图片URL
+        String imageUrl = CONSTANT.BASE_PIC_URL +  bookbean.getCover();
         //对recyclerview的子项数据进行赋值
-        String imageUrl=bookbean.getCover();
         Glide.with(activity).load(imageUrl).into(bookImg);
-        Log.d("ClassifyListActivity","oooc"+ String.valueOf(bookbeanList.size()));
+
         holder.bookTitle.setText(bookbean.getTitle());
         holder.bookAuthor.setText(bookbean.getAuthor());
+
         holder.bookTag.setText(bookbean.getMajorCate());
-        holder.bookInfo.setText("简介："+bookbean.getShortIntro());
-        holder.bookPersonNum.setText(bookbean.getLatelyFollower()+"人追更");
-        holder.bookSave.setText(bookbean.getRetentionRatio()+"%人保存");
+        holder.bookInfo.setText("简介：" + bookbean.getShortIntro());
+        holder.bookPersonNum.setText(bookbean.getLatelyFollower() + "人追更");
+        holder.bookSave.setText(bookbean.getRetentionRatio() + "%人保存");
         holder.bookID.setText(bookbean.get_id());
 
-        Log.d("ClassifyListActivity","oooid"+ bookbean.get_id());
-
-        if(mOnItemOnClickListener!=null){
+        if (mOnItemOnClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    mOnItemOnClickListener.onItemOnClick(holder.itemView,position);
+                    mOnItemOnClickListener.onItemOnClick(holder.itemView, position);
                 }
             });
 
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view) {
-                    mOnItemOnClickListener.onItemLongOnClick(holder.itemView,position);
+                    mOnItemOnClickListener.onItemLongOnClick(holder.itemView, position);
                     return false;
                 }
             });
@@ -137,5 +153,25 @@ public class ClassifyListAdapter extends RecyclerView.Adapter<ClassifyListAdapte
     public int getItemCount() {
         return bookbeanList.size();
     }
+
+//    public Bitmap getURLimage(String url) {
+//
+//        Bitmap bmp = null;
+//        try {
+//            URL myurl = new URL(url);
+//            // 获得连接
+//            HttpURLConnection conn = (HttpURLConnection) myurl.openConnection();
+//            conn.setConnectTimeout(6000);//设置超时
+//            conn.setDoInput(true);
+//            conn.setUseCaches(false);//不缓存
+//            conn.connect();
+//            InputStream is = conn.getInputStream();//获得图片的数据流
+//            bmp = BitmapFactory.decodeStream(is);
+//            is.close();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return bmp;
+//    }
 
 }

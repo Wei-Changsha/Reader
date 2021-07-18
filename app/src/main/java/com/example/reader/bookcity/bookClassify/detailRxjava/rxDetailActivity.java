@@ -107,12 +107,8 @@ public class rxDetailActivity extends BaseActivity<rxDetailPresenter, IdetailCon
             @Override
             public void showBookDetail(final BookDetail bookDetail) {
                 mBookDetail = bookDetail;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        initView(bookDetail);
-                    }
-                });
+                Log.d("dddd detail ", "rxDetailActivity title" + bookDetail.getTitle());
+                initView(bookDetail);
             }
         };
     }
