@@ -1,5 +1,7 @@
 package com.example.reader.bookcity.bookClassify.detailRxjava;
 
+import android.util.Log;
+
 import com.example.reader.Api.BookApi;
 import com.example.reader.base.BasePresenter;
 import com.example.reader.bean.BookDetail;
@@ -38,7 +40,7 @@ public class rxDetailPresenter extends BasePresenter<MVPDetailModel, rxDetailAct
             @Override
             public void getBookDetail(String bookId) {
 
-                //Log.d("rxDetailPresenter rrrr 000 bookid1 = ", bookId);
+                Log.d("rxDetailPresenter rrrr 000 bookid1 = ", bookId);
                 OkHttpClient client = bookApiModule.provideOkHttpClient();
                 bookApi = bookApiModule.provideBookService(client);
 
@@ -59,7 +61,7 @@ public class rxDetailPresenter extends BasePresenter<MVPDetailModel, rxDetailAct
                             @Override
                             public void onNext(BookDetail bookDetail) {
                                 //在这里直接返回网络请求的数据，可以不用谢Model层
-                                //Log.d("0000 next","rxDetail- p");
+                                Log.d("0000 next","rxDetail- p");
                                 mView.getContract().showBookDetail(bookDetail);
                             }
                         });

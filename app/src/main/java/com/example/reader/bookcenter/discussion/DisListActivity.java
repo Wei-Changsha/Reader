@@ -66,7 +66,7 @@ public class DisListActivity extends AppCompatActivity {
                         adapter.setOnItemClickListener(new DisListAdapter.OnItemOnClickListener() {
                             @Override
                             public void onItemOnClick(View view, int pos) {
-                                ByDiscussion.Posts posts=postsList.get(pos);
+                                ByDiscussion.Posts posts = postsList.get(pos);
                                 String disUrl="http://api.zhuishushenqi.com/post/"+posts.get_id();
                                 Intent intent=new Intent(DisListActivity.this, DisDetailActivity.class);
                                 intent.putExtra("disUrl",disUrl);

@@ -12,11 +12,11 @@ import com.example.reader.R;
 import com.example.reader.base.BaseActivity;
 import com.example.reader.bean.Bookbean;
 import com.example.reader.bookcity.bookClassify.ClassifyListAdapter;
-import com.example.reader.bookcity.bookClassify.detailRxjava.rxDetailActivity;
+import com.example.reader.bookcity.bookClassify.detailMVVM.DetailMVVMActivity;
 
 import java.util.List;
 
-public class CListActivity extends BaseActivity<ClistPresenter,IClassifyListContract.V> {
+public class CListActivity extends BaseActivity<ClistPresenter, IClassifyListContract.V> {
 
     private RecyclerView recyclerView;
     private TextView bookID;
@@ -24,19 +24,18 @@ public class CListActivity extends BaseActivity<ClistPresenter,IClassifyListCont
 
     @Override
     public void findView() {
-        Intent intent=getIntent();
-        String address=intent.getStringExtra("address");
+        Intent intent = getIntent();
+        String address = intent.getStringExtra("address");
         getContract().requestCList(address);
 
         recyclerView = findViewById(R.id.recycler_view);
-
         bookTitle = findViewById(R.id.book_title);
     }
 
     private void initView(List<Bookbean> bookbeanList) {
-        final LinearLayoutManager layoutManager=new LinearLayoutManager(this);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);//layoutManager指定recycler view的布局方式为LinearLayout
-        final ClassifyListAdapter adapter=new ClassifyListAdapter(bookbeanList,this);//将list数据传到适配器中;
+        final ClassifyListAdapter adapter = new ClassifyListAdapter(bookbeanList, this);//将list数据传到适配器中;
         recyclerView.setAdapter(adapter);
 
 
@@ -50,11 +49,12 @@ public class CListActivity extends BaseActivity<ClistPresenter,IClassifyListCont
                 bookID = findViewById(R.id.book_id);
                 //String bookUrl="http://api.zhuishushenqi.com/book/"+bookID.getText().toString();
                 String bookUrl = bookID.getText().toString();
-                Log.d("CList Avtivity ccc01 bookiddd = " ,bookUrl);
+                Log.d("CList Avtivity ccc01 bookiddd = ", bookUrl);
                 //跳转到书籍详情页
                 //Intent intent=new Intent(CListActivity.this, MVPDetailActivity.class);
-                Intent intent=new Intent(CListActivity.this, rxDetailActivity.class);
-                intent.putExtra("bookUrl",bookUrl);
+                //Intent intent = new Intent(CListActivity.this, rxDetailActivity.class);
+                Intent intent = new Intent(CListActivity.this, DetailMVVMActivity.class);
+                intent.putExtra("bookUrl", bookUrl);
                 startActivity(intent);
 
             }

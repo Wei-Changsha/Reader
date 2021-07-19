@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="15sp"
-    tools:context=".bookcity.bookClassify.ClassifyAvtivity">
+    tools:context=".bookcity.bookClassify.ClassifyActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

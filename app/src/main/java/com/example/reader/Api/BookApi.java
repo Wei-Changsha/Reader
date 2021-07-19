@@ -1,10 +1,10 @@
 package com.example.reader.Api;
 
 import com.example.reader.bean.BookDetail;
-import com.example.reader.bean.Bookbean;
 import com.example.reader.bean.CONSTANT;
 import com.example.reader.bean.rankBean.Ranking;
 import com.example.reader.bookcity.bookRanking.ByRanking;
+import com.example.reader.data.ClassifyListBody;
 import com.google.gson.GsonBuilder;
 
 import java.util.List;
@@ -26,10 +26,11 @@ public class BookApi {
     public BookApi(OkHttpClient okHttpClient) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(CONSTANT.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create()))//Gson数据解析器
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())//rxjava网络请求适配器
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder().create())) //Gson数据解析器
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create()) //rxjava网络请求适配器
                 .client(okHttpClient)
                 .build();
+
         service = retrofit.create(BookApiService.class);
     }
 
@@ -56,7 +57,7 @@ public class BookApi {
         return service.getOneRankingList(rankingId);
     }
 
-    public Observable<List<Bookbean>> getClassifyList(String gnder,String type, String major, String minor, int start, int limit ) {
-        return service.getClassifyList(gnder, type, major, minor, start, limit);
+    public Observable<ClassifyListBody> getClassifyList(String gender, String type, String major, String minor, int start, int limit ) {
+        return service.getClassifyList(gender, type, major, minor, start, limit);
     }
 }
